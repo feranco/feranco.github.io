@@ -3,8 +3,8 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            Feranco's blog
-tagline:          'A Jekyll blog'
+title:            Ferancoland
+tagline:          'Fernando Franco personal website'
 description:      'The <a href="http://hyde.getpoole.com" target="_blank">Hyde</a> theme for <a href="http://jekyllrb.com" target="_blank">Jekyll</a>, refreshed.'
 url:              https://feranco.github.io
 baseurl:          # the optional subpath of your site, e.g. "/blog"
