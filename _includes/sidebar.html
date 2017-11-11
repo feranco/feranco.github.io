@@ -1,9 +1,5 @@
 <div id="sidebar">
-  /*
-  <div class="sidebar-logo" >
-          <img src="images/avatar.jpg" />
-  </div>
-  */
+  {% include image name="avatar.jpg" caption="Myself" %}
   <header>
     <{% if page.layout == "index" %}h1{% else %}div{% endif %} class="site-title">
       <a href="{{ site.baseurl }}/">
