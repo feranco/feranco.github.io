@@ -12,4 +12,4 @@ tags:
   - title
 ---
 
-Check for long titles and how they might break layouts. You can download my cv [here] ({{ site.url }}/assets/document/cv.pdf). 
+Check for long titles and how they might break layouts. You can download my cv [here] ({{ site.url }}/assets/documents/cv.pdf). 
