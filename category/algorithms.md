@@ -1,7 +1,6 @@
-
 ---
 layout: category
 title: algorithms
 ---
 
-Posts dedicated to algorithms.
+Another sample category page.
