@@ -1,6 +1,6 @@
 ---
 layout: category
-title: algorithms
+title: Algorithms
 ---
 
 Another sample category page.
