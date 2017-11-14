@@ -2,7 +2,7 @@
 layout: post
 title: "Detecting cycles in graphs"
 categories:
-  - algorithms
+  - Algorithms
 tags:
   - graphs
 last_modified_at: 2017-11-14T10:55:59-05:00
