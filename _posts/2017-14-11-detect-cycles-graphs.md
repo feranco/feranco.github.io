@@ -9,4 +9,4 @@ elements:
 last_modified_at: 2017-03-09T10:55:59-05:00
 ---
 
-First post.
+Hoe to detect cycles in graphs.
