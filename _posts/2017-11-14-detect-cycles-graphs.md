@@ -6,7 +6,7 @@ categories:
   - algorithms
 elements:
   - graphs
-last_modified_at: 2017-03-09T10:55:59-05:00
+last_modified_at: 2017-11-14T10:55:59-05:00
 ---
 
-Hoe to detect cycles in graphs.
+How to detect cycles in graphs.
