@@ -17,6 +17,8 @@ This is my personal webpage. The opinions expressed here represent my own.
   <h2 class="page-title">{{ "Recent posts:" }}</h1>
 </header>
 
+{% include post-meta.html post=post %}
+
 <div class="content">
   {% include pagination-newer.html %}
 
