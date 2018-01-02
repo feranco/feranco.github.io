@@ -7,7 +7,7 @@ sidebar_link: true
 [//]: # (To make pages show up in the sidebar, add `sidebar_link: true` to the front matter.) 
 
  <figure>
-        <img src="/assets/images/street.jpg" />
+        <img src="/assets/images/street.jpg" width="800" height="600"/>
  </figure>
 
 <p class="message">
