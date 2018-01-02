@@ -3,7 +3,7 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            Feranco's Notes
+title:            Feranco Land
 tagline:          'Fernando Franco personal website'
 description:      'Personal website of <a href="about.html" target="_blank">Fernando Franco</a>, Software Engineer.'
 url:              https://feranco.github.io
