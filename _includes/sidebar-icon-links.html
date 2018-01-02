@@ -13,12 +13,11 @@
   {% endif %}
   
   {% if site.author.linkedin %}
-        <a href="{{ site.author.linkedin }}">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-square-o fa-stack-2x"></i>
-            <i class="fa fa-linkedin fa-stack-1x"></i>
-          </span>
-        </a>
+   <a id="linkedin-link"
+       class="icon" title="Linkedin" aria-label="Linkedin"
+       href="{{ site.author.linkedin }}">
+      {% include svg/linkedin.svg %}
+    </a>
   {% endif %}
 
   <a id="subscribe-link"
