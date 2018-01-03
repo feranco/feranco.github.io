@@ -12,6 +12,14 @@
     </a>
   {% endif %}
   
+  {% if site.author.twitter %}
+   <a id="linkedin-link"
+       class="icon" title="Twitter" aria-label="Twitter"
+       href="{{ site.author.twitter }}">
+      {% include svg/twitter.svg %}
+    </a>
+  {% endif %}
+  
   {% if site.author.linkedin %}
    <a id="linkedin-link"
        class="icon" title="Linkedin" aria-label="Linkedin"
