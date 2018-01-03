@@ -15,7 +15,7 @@ baseurl:          # the optional subpath of your site, e.g. "/blog"
 
 author:
   name:           'Fernando Franco'
-  url:            https://twitter.com/ferank0
+  twitter:        https://twitter.com/ferank0
   linkedin:       https://www.linkedin.com/in/fernando-franco-4696708/
 
 paginate:         5
