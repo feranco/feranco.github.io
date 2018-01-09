@@ -5,17 +5,19 @@ title: Modulo and Division using bitwise operation
 
 The integer division and modulo operators are widely used in different contexts. For example, the modulo operators allows creating repeating sequences of numbers that can be used to build circular queues or other objects that reuse array elements upon reaching the end of the data structure. The normal way to create such sequences is to increase a counter variable, divide the result by n and then keep the remainder. In C/C++ this means:                                                                                                                                                                                                                                                                                       
                                                                                                                                                                                                                                                                          
-<div class="message">
+{% highlight cpp %}
   cnt = (cnt + 1) % n;
-</div>
+{% endhighlight %}
 
 The problem with this implementation is that modulo is an expensive operation, requiring far more clock cycles than other operation like addition or subtraction. In general it is more efficient to create modulo-n sequences using a comparison instead of the modulo operator: 
 
-<div class="message">
+{% highlight cpp %}
   cnt = (cnt + 1);
   if (cnt >= n) 
     cnt = 0;
-</div>
+{% endhighlight %}
+
+Anyway, in the special case when n is a power of two, it is possible to create modulo-n sequences in a more efficient way using the bitwise AND operator. The procedure is to increment the counter and then AND it with the value $2^n - 1$.
 
 Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. *Aenean eu leo quam.* Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
 
