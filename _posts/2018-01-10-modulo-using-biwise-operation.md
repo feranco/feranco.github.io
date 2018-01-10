@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Modulo and Division using bitwise operation
+title: Modulo using bitwise operation
 categories:
-  - Algorithms
+  - Programming
 tags:
   - Bit Manipulation
 last_modified_at: 2018-01-10T11:19:59-05:00
