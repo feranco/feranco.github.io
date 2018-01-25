@@ -39,8 +39,6 @@ vector<T> rotate (vector<T> a, unsigned int p) {
       j = (j + p) % a.size();
     }
     a[k] = tmp;
-    for (int x : a) cout << x << " " ;
-    cout << "\n";
   }
   return a;
 } 
