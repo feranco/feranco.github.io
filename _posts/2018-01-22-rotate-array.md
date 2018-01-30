@@ -44,3 +44,4 @@ vector<T> rotate (vector<T> a, unsigned int p) {
 } 
 {% endhighlight %}
 
+Another different way to solve the problem is to use the divide et impera paradigma. The key of this approach is to note that the array A is composed by two segments S1 and S2, where S1 includes the first P elements of A.  
