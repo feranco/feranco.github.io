@@ -44,4 +44,48 @@ vector<T> rotate (vector<T> a, unsigned int p) {
 } 
 {% endhighlight %}
 
-Another different way to solve the problem is to use the divide et impera paradigma. The key of this approach is to note that the array A is composed by two segments S1 and S2, where S1 includes the first P elements of A.  
+Another different way to solve the problem is to use the divide et impera paradigma. The key of this approach is to note that the array A is composed by two segments S1 and S2, where S1 includes the first P elements of A. If the size of S2 is greater than the on of S1, it is possible to split S2 into two segments S2_left and S2_right. S2_right has size equal to A and S2_left has size S2-S2_right. Swapping S1 and S2_right generates a new array S2_rightS2_leftS1 that has S1 in its proper place after rotation. The problem is now to swap S2_right ans S2_left. Since this problem is the same of the original one, it isposibl to solve it recursively according to the divide et impera paradigma. The following C++ code is an implementation of this approach:
+
+{% highlight cpp %} 
+template <typename T>
+vector<T> rotate (vector<T> a, size_t l, size_t m, size_t r) {
+  
+  size_t size_left = m-l+1, size_right = r-m;
+  
+  if (size_left == size_right) {
+    cout << "l " << l << " m " << m << " r " << r << "\n";
+    int i = l, j = m+1;
+    while (i <= m) {
+      swap(a[i++],a[j++]);
+    }
+    return a;
+  }
+  
+  if (size_left < size_right) {
+    int i = l, j = r-(m-l);//std::max(r-m,m+1);
+    while (i <= m) {
+      swap(a[i++],a[j++]);
+    }
+    for (int x : a) cout << x << " " ;
+    cout << "\n";
+    cout << "l " << l << " m " << m << " r " << r-m+l-1 << "\n";
+    return rotateDI (a, l, m, r-m+l-1);
+  }
+  else {
+    int i = m+1, j = l;
+    while (i <= r) {
+      swap(a[i++], a[j++]);
+    }
+    for (int x : a) cout << x << " " ;
+    cout << "\n";
+    cout << "l " << l+r-m << " m " << m << " r " << r<< "\n";
+    return rotateDI(a, l+r-m, m, r);
+  }
+}
+
+template <typename T>
+vector<T> rotate (vector<T> a, unsigned int p) {
+  return rotate(a, 0, p-1, a.size()-1);
+}
+  
+{% endhighlight %}
