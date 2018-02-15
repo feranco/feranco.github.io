@@ -15,31 +15,31 @@ followed by the operator itself. Usually, the operators may be members or non-me
 difference. An exception is when the operators << and >> are overloaded for iostreams. In this particular case, the first parameter is a stream
 and not an object of the class where the stream operator is defined. 
 
-#include <iostream>  
-using namespace std;  
+{% highlight cpp %}  
   
 class Date  
 {  
-    int month, day, year;  
+    int day, month, year;  
 public:  
-    Date(int m, int day, int year)  
+    Date(int d, int m, int y)  
     {  
-        month = m; da = d; yr = y;  
+        month = m; day = d; year = y;  
     }  
-    friend ostream& operator<<(ostream& os, const Date& dt);  
+    friend std::ostream& operator<<(std::ostream& os, const Date& dt);  
 };  
   
-ostream& operator<<(ostream& os, const Date& dt)  
+std::ostream& operator<<(std::ostream& os, const Date& date)  
 {  
-    os << dt.mo << '/' << dt.da << '/' << dt.yr;  
+    os << date.day << '/' << date.month << '/' << date.year;  
     return os;  
 }  
   
 int main()  
 {  
-    Date dt(5, 6, 92);  
+    Date date(17, 06, 2001);  
     cout << dt;  
 }  
+
 Here, it is important to make operator overloading function a friend of the class because it would be called without creating an object. The overloaded << operator function must then be declared as a friend of class Date so it can access the private data within a Date object.
 
 The stream operators:
