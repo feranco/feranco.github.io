@@ -11,8 +11,35 @@ last_modified_at: 2017-11-14T10:55:59-05:00
 
 Operator overloading is just another way to make a function call. The main difference is that the arguments of the function are not inside
 parenthesis, but they surround the function or are next to the function. The definition of these function is done using the keyword operator
-followed by the operator itself.
+followed by the operator itself. Usually, the operators may be members or non-members of a class, and it doesn’t seem to make much 
+difference. An exception is when the operators << and >> are overloaded for iostreams. In this particular case, the first parameter is a stream
+and not an object of the class where the stream operator is defined. 
 
+#include <iostream>  
+using namespace std;  
+  
+class Date  
+{  
+    int month, day, year;  
+public:  
+    Date(int m, int day, int year)  
+    {  
+        month = m; da = d; yr = y;  
+    }  
+    friend ostream& operator<<(ostream& os, const Date& dt);  
+};  
+  
+ostream& operator<<(ostream& os, const Date& dt)  
+{  
+    os << dt.mo << '/' << dt.da << '/' << dt.yr;  
+    return os;  
+}  
+  
+int main()  
+{  
+    Date dt(5, 6, 92);  
+    cout << dt;  
+}  
 Here, it is important to make operator overloading function a friend of the class because it would be called without creating an object. The overloaded << operator function must then be declared as a friend of class Date so it can access the private data within a Date object.
 
 The stream operators:
