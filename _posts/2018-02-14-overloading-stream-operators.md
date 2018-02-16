@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Overloading Input/Output Operators in C++"
+title: "Overloading Stream Operators in C++"
 categories:
   - Programming
 tags:
