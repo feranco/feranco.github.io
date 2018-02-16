@@ -20,6 +20,7 @@ so that it is possible to concatenate stream operations together. Finally, it wo
 1. for the input streaming operator >>, the second parameter must not be const because an input operation changes the object being read into;
 2. for the output streaming operator <<, the second parameter should be const because an output operation should not change the object being written out.
 The following code shows an example where the stream operators are overloaded for a generic Date class.
+
 {% highlight cpp %}  
   
 class Date  
