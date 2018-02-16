@@ -5,7 +5,6 @@ categories:
   - Programming
 tags:
   - C++
-  - overloading
 last_modified_at: 2018-02-14T08:55:59-05:00
 ---
 
