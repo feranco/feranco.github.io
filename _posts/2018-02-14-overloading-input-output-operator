@@ -19,7 +19,8 @@ stream operators pass the stream objects by reference, so that the operations af
 so that it is possible to concatenate stream operations together. Finally, it worth to take into account the following remarks:
 1. for the input streaming operator >>, the second parameter must not be const because an input operation changes the object being read into;
 2. for the output streaming operator <<, the second parameter should be const because an output operation should not change the object being written out.
-
+n general, the output streaming operator need not be a friend; there is usually a way to access the information it needs through the public member functions of the class, without losing efficiency.
+The input streaming operator is a friend only for efficiency reasons; we can stream directly into the member variables.
 {% highlight cpp %}  
   
 class Date  
