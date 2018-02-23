@@ -29,14 +29,24 @@ Given an engine variable e and a distribution variable d, each call d(e) produce
 int two_dice ( )
 {
    std::default_random_engine e{};
-   std::uniform_int_distribution<int> d{1, 6};
+   std::uniform_int_distribution<int> d{1, 12};
    return d(e);
 }
 
 {% endhighlight %}  
 
 
-Every engine shall be always initialized through a value that is the starting point or seed of the generated sequences. As we did above, an engine can be default-initialized.
+Every engine shall be always initialized through a value that is the starting point or seed of the generated sequences. In the example above the engine was default-initialized, but it is also possible to provide an explicit starting value (a seed) to its constructor: 
 
+{% highlight cpp %} 
+   std::default_random_engine e{121181};
+{% endhighlight %} 
+
+When a program is run multiple times, an engine will always produce the same sequence if it is always initialized with the same seed. Even if this behaviour can be very useful while debugging a program, in many contexts it is undesireable and problematic. The best way to avoid replicated sequences is to use an object of type random_device to obtain a seed:
+
+{% highlight cpp %} 
+std::random_device         rdev{};
+std::default_random_engine e{rdev()};
+{% endhighlight %} 
 
 use random_device once to seed the random number generator named mt. random_device() is slower than mt19937, but it does not need to be seeded because it requests random data from your operating system
