@@ -22,6 +22,8 @@ The random functions introduced with C++11 improved enormously the way to genera
 
 Given an engine variable e and a distribution variable d, each call d(e) produces a random number according to the distribution. In other words, the engine variable provides a source of randomness and the distribution variable shapes this source to fit the distribution. The following code implements a simple function that simulates the launch of two dice generates a random integer according to uniform distribution:
 
+{% highlight cpp %}  
+
 #include <random>
   
 int two_dice ( )
@@ -31,9 +33,10 @@ int two_dice ( )
    return d(e);
 }
 
+{% endhighlight %}  
 
 
-Every engine shall be always initialized through a value that is the starting point or seed of the generated sequences.
+Every engine shall be always initialized through a value that is the starting point or seed of the generated sequences. As we did above, an engine can be default-initialized.
 
 
 use random_device once to seed the random number generator named mt. random_device() is slower than mt19937, but it does not need to be seeded because it requests random data from your operating system
