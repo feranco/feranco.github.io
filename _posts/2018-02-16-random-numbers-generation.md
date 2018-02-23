@@ -49,4 +49,4 @@ std::random_device         rdev{};
 std::default_random_engine e{rdev()};
 {% endhighlight %} 
 
-use random_device once to seed the random number generator named mt. random_device() is slower than mt19937, but it does not need to be seeded because it requests random data from your operating system
+All the above exampes uses default_random_engine as engine. This is an alias for an engine type selected by the library vendor, so code that uses this alias need not generate identical sequences across implementations. In addition to the default_random_engine, the <random> library provides nine additional aliases for pre-configured engine. For alle these engines, the C++11 standard requires that they produce identical results across all implementations. Among them, an engine that produces good results is the Mersenne twister engine mt19937. Anyway, explaining the differences between such engines goes far behond the purpose of this post. 
