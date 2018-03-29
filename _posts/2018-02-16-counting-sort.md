@@ -11,17 +11,10 @@ last_modified_at: 2018-03-26T23:55:59-05:00
 While all comparison-based algorithms have a time complexity of O(nlogn), there are other algorithms that an run in linear time provided 
 that some assumptions about the input are verified. Counting sort is an algorithm that has a time complexity of O(n), assuming that that 
 each of the n input elements is an integer in the range 0 to k or has an integer key in that range. Counting sort uses two temporary arrays:
-* an integer array of size k, specifying
-and a temporary array, where to insert the sorted elements.  is composed by three steps.
-The first fill the array of size k 
+* an integer array of size k specifying, for each element x, the number of input elements with key less or equal to x;
+* an array of size n, where to insert the sorted elements.  
 
-computes, for each input element x, the number of elements equal to x. The second 
-
-less than x. It uses this information to place element x directly into its position in the output array. F
-or example, if 17 elements are less than x, then x belongs in output position 18. We must modify this scheme slightly to handle the
-situation in which several elements have the same value, since we do not want to put them all in the same position.
-
-An important property of counting sort is that it is stable: numbers with the same value appear in the output array in the same order 
+Basically, the counting sort is composed by three cycles. The first iterates through the keys of the input array and fills the temporary array of size k so that it specifies, for each element x, the number of elements equal to x. Considering the role played by this temporary array, in the following we can refer to it as the counter array. The second iterates through the counter array, updating it so that each element represents the number of input elements with key less or equal to x. The third iterates through the input array using the information to place element each x directly into its position in the temporary output array of size n. For example, if 5 elements are less or equal than x, then x belongs in output position 5. The number of elements less or equal than x in the counter array is then decreased in order to handle the situation in which more input elements have the same key. At the end of this step the output array contains all the sorted input elements and it is copied back to the input array. An important property of counting sort is that it is stable: numbers with the same value appear in the output array in the same order 
 as they do in the input array.
 
 {% highlight cpp %} 
