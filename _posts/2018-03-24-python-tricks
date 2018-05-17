@@ -1,0 +1,23 @@
+---
+layout: post
+title: Python Tricks
+categories:
+  - Programming
+tags:
+  - Python
+last_modified_at: 2018-03-24T11:07:45-05:00
+---
+
+A short notation to define and initialize a 2D matrix as a list of list is the following: 
+
+{% highlight python %}
+matrix = [[0]*cols for i in range(rows)]
+{% endhighlight %}
+
+where 0 is the intialization value for all matrix elements, cols is the number of columns and rows is the number of rows.
+Unfortunately shortening the previous notation as [[0]*cols]*rows doesn't really work because it creates rows copies of the same 
+list of size cols, so when an element is modified, all the other elements of the same column are modified. 
+This is because [0]*5 creates a sequence [0.0.0.0.0] with 5 times a reference to the same Object representing the number 0, but 0 is immutable (it's not an object),
+so changes to an ekement doesn't propagate to the whole row. 
+Then if you pretend you had a variable x = [0,0,0,0,0] then it would could reference x 5 times if you did [x*5], 
+so now if you change x, it propagates through all references, and this is what happens when you do [[0]*5]*5
