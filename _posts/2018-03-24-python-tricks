@@ -28,3 +28,40 @@ belonging to the same column are modified. Indeed if cols = 3, [0]*cols creates 
 same (immutable) object representing the number 0. Consequently, [[0]*cols]*rows creates **rows** references to the same list [0 0 0]
 and any change to an element of a list is propagated through all references. The change doesn't propagate internally to each list, 
 because the list objects are immutable.
+
+## Get indices in for loop
+
+The enumerate() function adds an index to an iterable, producing for each element a tuple with (index, element). 
+If the for loop specifies two varibles, the first variable bind to the element index and the second one to the element value. 
+So the following example 
+
+{% highlight python %}
+values = ["a", "b", "c", "d", "e"]
+for idx, val in enumerate(values) :
+    print (idx, val)
+{% endhighlight %}
+
+produces as output 
+
+```yaml
+0 a
+1 b
+2 c
+3 d
+4 e
+```
+
+By default, enumerate() starts indexing at 0, specifying a second integer argument, it'll start from that index instead.
+
+{% highlight python %}
+values = ["a", "b", "c", "d", "e"]
+for idx, val in enumerate(values,3) :
+    print (idx, val)
+{% endhighlight %}
+
+produces as output 
+
+```yaml
+3 d
+4 e
+```
