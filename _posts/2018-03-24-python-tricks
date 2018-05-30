@@ -65,3 +65,7 @@ produces as output
 3 d
 4 e
 ```
+
+## Max integer value
+
+Python 3 doesn't have limit on int, but it's possible to use sys.maxsize as an integer larger than any practical list or string index.
