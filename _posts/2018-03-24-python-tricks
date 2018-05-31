@@ -8,6 +8,12 @@ tags:
 last_modified_at: 2018-03-24T11:07:45-05:00
 ---
 
+## list declaration
+
+dp = [value]*length
+
+where value is the initialization value for all list elements and length is the length of the list
+
 ## 2D list declaration
 
 A short notation to define and initialize a 2D matrix as a list of list is the following: 
