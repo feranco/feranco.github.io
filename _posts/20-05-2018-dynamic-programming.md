@@ -20,13 +20,16 @@ When developing a dynamic-programming algorithm, we follow a sequence of four st
 3. Compute the value of an optimal solution, typically in a bottom-up fashion. 
 4. Construct an optimal solution from computed information.
 
-Let’s see the base of DP with the help of a simple problem that can be found in [Leetcode](https://leetcode.com/problems/house-robber/description/). The House Robber problem is defined as follows. 
+Let’s see the base of DP with the help of a simple problem that can be found in [Leetcode](https://leetcode.com/problems/house-robber/description/). The House Robber problem is defined as follows: 
 ```yaml
 You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night. Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
 ```
+In abstract, given an array of integer find the maximum sum that can be computed without taking two consecutive numbers.
 ## Define the structure of an optimal solution
 
-A DP is an algorithmic technique which is usually based on a recurrent formula and one (or some) starting states. A sub-solution of the problem is constructed from previously found ones. First of all we need to find a state for which an optimal solution is found and with the help of which we can find the optimal solution for the next state. What does a "state" stand for? It’s a way to describe a situation, a sub-solution for the problem. For example a state would be
+A Dynamic Programming solution is usually based on one (or more) starting state and a recurrent formula linking a new state to the previously found ones. So the first step is to find a state for which an optimal solution is already defined and that can be used to find an optimal solution for the next state. In this context, a state is a way to describe a sub-solution for the problem. For example a state would be the solution for sum i, where i≤S.
+
+A sub-solution of the problem is constructed from previously found ones. First of all we need to find a state for which an optimal solution is found and with the help of which we can find the optimal solution for the next state. What does a "state" stand for? It’s a way to describe a situation, a sub-solution for the problem. For example a state would be
 
 A DP is an algorithmic technique which is usually based on a recurrent formula and one (or some) starting states. A sub-solution of the problem is constructed from previously found ones. 
 
