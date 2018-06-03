@@ -17,7 +17,7 @@ Another carachteristic of dynamic programming problems is that they have **optim
 When developing a dynamic-programming algorithm, we follow a sequence of four steps:
 1. Define the structure of an optimal solution.
 2. Recursively define the value of an optimal solution.
-3. Compute the value of an optimal solution, typically in a bottom-up fashion. 
+3. Compute the value of an optimal solution in a bottom-up or top-down fashion. 
 4. Construct an optimal solution from computed information.
 
 Let’s see the base of DP with the help of a simple problem that can be found in [Leetcode](https://leetcode.com/problems/house-robber/description/). The House Robber problem is defined as follows: 
@@ -31,6 +31,9 @@ In abstract: given an array of N integer, the problem is to find the maximum sum
 A Dynamic Programming solution is usually based on one (or more) starting state and a recurrent formula linking a new state to the previously found ones. So the first step is to find a state for which an optimal solution is already defined and that can be used to find an optimal solution for the next state. In this context, a state is a way to describe a sub-solution for the problem. For the House Robber example, a state could be the solution for an array of length l where l≤N. A smaller state than state l would be the solution for an array of length i, where i<l. The starting state is the solution for an empty array: 0.
 
 ## Recursively define the value of an optimal solution.
+
+The second step is to find a recurrent formula computing an optimal solution for a state in terms of the optimal solution of smaller states. Such a formula can be defined by carefully analyzing the problem to be solved. In the case of House Robber problem, it can be observed that a generic array element i an be part or not be part of an optimal solution. If i is part of an optimal solution, the previous element i-1 cannot be part of an optimal solution and the solution for an array of length i is given by the value of the array element i plus an optimal solution of an array of length i-2. If i is not part of an optimal solution, the previous element i-1 can be part of an optimal solution and the solution for an array of length i is given by
+ 
 
 {% highlight cpp %}
 int rob_helper(vector<int>& nums, vector<int>& dp, int idx) {
