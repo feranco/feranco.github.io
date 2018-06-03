@@ -28,7 +28,7 @@ In abstract: given an array of N integer, the problem is to find the maximum sum
 
 ## Define the structure of an optimal solution
 
-A Dynamic Programming solution is usually based on one (or more) starting state and a recurrent formula linking a new state to the previously found ones. So the first step is to find a state for which an optimal solution is already defined and that can be used to find an optimal solution for the next state. In this context, a state is a way to describe a sub-solution for the problem. For the House Robber example, a state could be the solution for an array of length l where l≤N. A smaller state than state l would be the solution for an array of length i, where i<l. 
+A Dynamic Programming solution is usually based on one (or more) starting state and a recurrent formula linking a new state to the previously found ones. So the first step is to find a state for which an optimal solution is already defined and that can be used to find an optimal solution for the next state. In this context, a state is a way to describe a sub-solution for the problem. For the House Robber example, a state could be the solution for an array of length l where l≤N. A smaller state than state l would be the solution for an array of length i, where i<l. The starting state is the solution for an empty array: 0.
 
 ## Recursively define the value of an optimal solution.
 
