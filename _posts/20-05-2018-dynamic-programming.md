@@ -24,7 +24,7 @@ Let’s see the base of DP with the help of a simple problem that can be found i
 ```yaml
 You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night. Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
 ```
-In abstract: given an array of N integer, the problem is to find the maximum sum that can be computed without taking two consecutive numbers.
+In abstract: given an array A of N integer, the problem is to find the maximum sum that can be computed without taking two consecutive numbers.
 
 ## Define the structure of an optimal solution
 
@@ -32,8 +32,11 @@ A Dynamic Programming solution is usually based on one (or more) starting state 
 
 ## Recursively define the value of an optimal solution.
 
-The second step is to find a recurrent formula computing an optimal solution for a state in terms of the optimal solution of smaller states. Such a formula can be defined by carefully analyzing the problem to be solved. In the case of House Robber problem, it can be observed that a generic array element i an be part or not be part of an optimal solution. If i is part of an optimal solution, the previous element i-1 cannot be part of an optimal solution and the solution for an array of length i is given by the value of the array element i plus an optimal solution of an array of length i-2. If i is not part of an optimal solution, the previous element i-1 can be part of an optimal solution and the solution for an array of length i is given by
- 
+The second step is to find a recurrent formula computing an optimal solution for a state in terms of the optimal solution of smaller states. Such a formula can be defined by carefully analyzing the problem to be solved. In the case of House Robber problem, it can be observed that a generic array element i can be part or not be part of an optimal solution. If i is part of an optimal solution, the previous element i-1 cannot be part of an optimal solution and the solution for an array of length i is given by the value of the array element i plus an optimal solution of an array of length i-2. If i is not part of an optimal solution, the previous element i-1 can be part of an optimal solution and the solution for an array of length i is given by an optimal solution of an array of length i-2. So, an optimal solution S(i) for an array A of length i is given by S(i) = max (A[i] + S(i-2), S(i-1).
+
+## Compute the value of an optimal solution. 
+
+Once the value of an optimal solution is defined by a recurrent formula, there are two approaches to implement a procedure computing this value. The first approach is **top-down with memoization**: the program is written recursively in a natural manner, but modified to save each subsolution (tipically in an array or hash table). The program first checks if a solution for the subproblem was already found. If so, it returns the saved value avoid to recompute the subsolution; if not, the procedure computes the value in the usual manner. The following C++ programs implements a solution to the House Robber problem according to this approach.
 
 {% highlight cpp %}
 int rob_helper(vector<int>& nums, vector<int>& dp, int idx) {
@@ -52,3 +55,10 @@ int rob(vector<int>& nums) {
     return rob_helper(nums, dp, 0);
 }
 {% endhighlight %}
+  
+The second approach is the **bottom-up**: the subproblems are solved in order of size, such that solving a particular subproblem depends only on the solution of smaller subproblems. When the value of an optimal solution for a subproblem is computed, all the values of an optimal solution for smaller subproblems its solution depends upon were already computed and saved. Each sub-problem is solved only once, and when it is solved, subproblems its solution depends upon were already computed. 
+
+
+We evaluate the Fibonacci numbers from smallest to biggest and store all the results, so we know that we have
+
+and it depends on some notion of the “size” of a subproblem: the subproblem  This approach typically depends on some natural notion of the “size” of a subproblem, such that solving any par- ticular subproblem depends only on solving “smaller” subproblems. We sort the subproblems by size and solve them in size order, smallest first. When solving a particular subproblem, we have already solved all of the smaller subproblems its solution depends upon, and we have saved their solutions. We solve each sub- problem only once, and when we first see it, we have already solved all of its prerequisite subproblems. 
