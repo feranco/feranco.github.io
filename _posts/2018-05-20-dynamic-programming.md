@@ -8,6 +8,7 @@ tags:
 last_modified_at: 2018-05-25T09:55:59-05:00
 ---
 
+<div class=text-justify>
 Dynamic programming is a method that solves problems by combining the solutions to subproblems. In particular, dynamic programming applies when the **subproblems overlap**. A dynamic-programming algorithm solves each subsubproblem just once and then saves its answer in a table, avoiding the work of recomputing the answer every time a subsubproblem needs to be solved again. The word Programming in this context refers to a tabular method and not to writing computer code. 
 
 Dynamic programming is tipically applied to optimization problems, having many possible solutions. Each solution has a value, and the goal is to find a solution with the optimal (minimum or maximum) value. Such a solution should be called an optimal solution to the problem, as opposed to the optimal solution, since there may be several solutions that bring to the optimal value. Dynamic programming is generally the right method for optimization problems on combinatorial objects that have an inherent left to right order among components, such as: character strings, rooted trees and integer sequences.
@@ -88,4 +89,5 @@ def rob(self, nums):
   
   return max(dp_true[len(dp_true)-1], dp_false[len(dp_false)-1])
 {% endhighlight %}
+</div>
         
