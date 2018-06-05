@@ -66,23 +66,16 @@ The second approach is **bottom-up**: the subproblems are solved in order of siz
 {% highlight python %}
 def rob(self, nums):
   
-  if len(nums) == 0 :
-      return 0
-  
-  #define the starting state:
-  #dp_true is the optimal value of a solution including the current element
-  #dp_false is the optimal value of a solution not including the current element
-  dp_true = [nums[0]]
-  dp_false = [0]
+  #define the starting state
+  dp = [0]
   
   #compute all states in size order
-  for i in range(1,len(nums)) :
-      dp_true.append(max(dp_false[i-1] + nums[i], dp_true[i-1]))
-      dp_false.append(dp_true[i-1])
-  
-  return max(dp_true[len(dp_true)-1], dp_false[len(dp_false)-1])
+  for i in range(len(nums)) :
+      dp.append(max(dp[i-1] + nums[i], dp[i]))
+
+  return dp[-1]
 {% endhighlight %}
 
-A more careful analysis shows that there is no need to store all the intermediate values for the entire period of execution. Because the recurrent formula depends only two arguments, we only need to retain the last two values we have seen:
+The two approaches yield algorithms with the same asymptotic running time and space. For the House Robber problem both time and space are O(n), where n is the length of the array. A more careful analysis demonstrates that there is no need to store all the intermediate values for the entire period of execution. Because the recurrent formula depends only on the last two solutions, only the last two computed values need to be saved.
 </div>
         
