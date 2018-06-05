@@ -22,7 +22,11 @@ When developing a dynamic-programming algorithm, we follow a sequence of four st
 
 Let’s see the base of DP with the help of a simple problem that can be found in [Leetcode](https://leetcode.com/problems/house-robber/description/). The House Robber problem is defined as follows: 
 ```yaml
-You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night. Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+A professional robber plans to rob houses along a street. Each house has a certain amount of money stashed, 
+the only constraint stopping the rob from robbing each of them is that adjacent houses have security system 
+connected and it will automatically contact the police if two adjacent houses were broken into. Given a list 
+of non-negative integers representing the amount of money of each house, the problem is to determine the maximum 
+amount of money that can be robbed without alerting the police.
 ```
 In abstract: given an array A of N integer, the problem is to find the maximum sum that can be computed without taking two consecutive numbers.
 
@@ -56,7 +60,9 @@ int rob(vector<int>& nums) {
 }
 {% endhighlight %}
   
-The second approach is **bottom-up**: the subproblems are solved in order of size, such that solving a particular subproblem depends only on the solution of smaller subproblems. When the value of an optimal solution for a subproblem is computed, all the values of an optimal solution for smaller subproblems its solution depends upon were already computed and saved. Each sub-problem is solved only once, and when it is solved, subproblems its solution depends upon were already computed. 
+The second approach is **bottom-up**: the subproblems are solved in order of size, such that solving a particular subproblem depends only on the solution of smaller subproblems. In this way, each sub-problem is solved only once and when it is solved, all subproblems its solution depends upon were already solved and the corresponding values were saved.. 
+
+When an optimal solution for a subproblem is computed, all the values of an optimal solution for smaller subproblems its solution depends upon were already computed and saved. 
 
 
 We evaluate the Fibonacci numbers from smallest to biggest and store all the results, so we know that we have
