@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Dynamic Programming"
+title: Dynamic Programming
 categories:
   - Algorithms
 tags:
@@ -40,19 +40,19 @@ Once the value of an optimal solution is defined by a recurrent formula, there a
 
 {% highlight cpp %}
 int rob_helper(vector<int>& nums, vector<int>& dp, int idx) {
-        
-    if (idx >= nums.size()) return 0;
-   
-    if (dp[idx] >= 0) return dp[idx];
-    
-    dp[idx] = max(nums[idx] + rob_helper(nums, dp, idx+2), rob_helper(nums, dp, idx+1));
-    
-    return dp[idx];
+  //base case     
+  if (idx >= nums.size()) return 0;
+  //check for cached results
+  if (dp[idx] >= 0) return dp[idx];
+  //compute and save current solution
+  dp[idx] = max(nums[idx] + rob_helper(nums, dp, idx+2), rob_helper(nums, dp, idx+1));
+
+  return dp[idx];
 }
     
 int rob(vector<int>& nums) {
-    vector<int> dp(nums.size(),-1);
-    return rob_helper(nums, dp, 0);
+  vector<int> dp(nums.size(),-1);
+  return rob_helper(nums, dp, 0);
 }
 {% endhighlight %}
   
@@ -62,3 +62,24 @@ The second approach is the **bottom-up**: the subproblems are solved in order of
 We evaluate the Fibonacci numbers from smallest to biggest and store all the results, so we know that we have
 
 and it depends on some notion of the “size” of a subproblem: the subproblem  This approach typically depends on some natural notion of the “size” of a subproblem, such that solving any par- ticular subproblem depends only on solving “smaller” subproblems. We sort the subproblems by size and solve them in size order, smallest first. When solving a particular subproblem, we have already solved all of the smaller subproblems its solution depends upon, and we have saved their solutions. We solve each sub- problem only once, and when we first see it, we have already solved all of its prerequisite subproblems. 
+
+{% highlight python %}
+def rob(self, nums):
+  
+  if len(nums) == 0 :
+      return 0
+  
+  #define the starting state:
+  #dp_true is the optimal value of a solution including the current element
+  #dp_false is the optimal value of a solution not including the current element
+  dp_true = [nums[0]]
+  dp_false = [0]
+  
+  #compute all states in size order
+  for i in range(1,len(nums)) :
+      dp_true.append(max(dp_false[i-1] + nums[i], dp_true[i-1]))
+      dp_false.append(dp_true[i-1])
+  
+  return max(dp_true[len(dp_true)-1], dp_false[len(dp_false)-1])
+{% endhighlight %}
+        
