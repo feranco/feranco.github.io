@@ -56,7 +56,7 @@ int rob(vector<int>& nums) {
 }
 {% endhighlight %}
   
-The second approach is the **bottom-up**: the subproblems are solved in order of size, such that solving a particular subproblem depends only on the solution of smaller subproblems. When the value of an optimal solution for a subproblem is computed, all the values of an optimal solution for smaller subproblems its solution depends upon were already computed and saved. Each sub-problem is solved only once, and when it is solved, subproblems its solution depends upon were already computed. 
+The second approach is **bottom-up**: the subproblems are solved in order of size, such that solving a particular subproblem depends only on the solution of smaller subproblems. When the value of an optimal solution for a subproblem is computed, all the values of an optimal solution for smaller subproblems its solution depends upon were already computed and saved. Each sub-problem is solved only once, and when it is solved, subproblems its solution depends upon were already computed. 
 
 
 We evaluate the Fibonacci numbers from smallest to biggest and store all the results, so we know that we have
