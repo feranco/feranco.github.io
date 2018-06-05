@@ -8,7 +8,6 @@ tags:
 last_modified_at: 2018-05-25T09:55:59-05:00
 ---
 
-<div class=text-justify>
 Dynamic programming is a method that solves problems by combining the solutions to subproblems. In particular, dynamic programming applies when the **subproblems overlap**. A dynamic-programming algorithm solves each subsubproblem just once and then saves its answer in a table, avoiding the work of recomputing the answer every time a subsubproblem needs to be solved again. The word Programming in this context refers to a tabular method and not to writing computer code. 
 
 Dynamic programming is tipically applied to optimization problems, having many possible solutions. Each solution has a value, and the goal is to find a solution with the optimal (minimum or maximum) value. Such a solution should be called an optimal solution to the problem, as opposed to the optimal solution, since there may be several solutions that bring to the optimal value. Dynamic programming is generally the right method for optimization problems on combinatorial objects that have an inherent left to right order among components, such as: character strings, rooted trees and integer sequences.
@@ -19,7 +18,7 @@ When developing a dynamic-programming algorithm, we follow a sequence of four st
 1. Define the structure of an optimal solution.
 2. Recursively define the value of an optimal solution.
 3. Compute the value of an optimal solution in a bottom-up or top-down fashion. 
-4. Construct an optimal solution from computed information.
+4. Construct an optimal solution from computed values.
 
 Let’s see the base of DP with the help of a simple problem that can be found in [Leetcode](https://leetcode.com/problems/house-robber/description/). The House Robber problem is defined as follows: 
 ```yaml
@@ -77,5 +76,9 @@ def rob(self, nums):
 {% endhighlight %}
 
 The two approaches yield algorithms with the same asymptotic running time and space. For the House Robber problem both time and space are O(n), where n is the length of the array. A more careful analysis demonstrates that there is no need to store all the intermediate values for the entire period of execution. Because the recurrent formula depends only on the last two solutions, only the last two computed values need to be saved.
-</div>
+
+##Construct an optimal solution
+
+ur dynamic-programming solutions to the rod-cutting problem return the value of an optimal solution, but they do not return an actual solution: a list of piece sizes. We can extend the dynamic-programming approach to record not only the optimal value computed for each subproblem, but also a choice that led to the optimal value. With this information, we can readily print an optimal solution.
+
         
