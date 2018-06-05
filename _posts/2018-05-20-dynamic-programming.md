@@ -41,7 +41,7 @@ The second step is to find a recurrent formula computing an optimal solution for
 
 ## Compute the value of an optimal solution. 
 
-Once the value of an optimal solution is defined by a recurrent formula, there are two approaches to implement a procedure computing this value. The first approach is **top-down with memoization**: the program is written recursively in a natural manner, but modified to save each subsolution (tipically in an array or hash table). The program first checks if a solution for the subproblem was already found. If so, it returns the saved value avoid to recompute the subsolution; if not, the procedure computes the value in the usual manner. The following C++ programs implements a solution to the House Robber problem according to this approach.
+Once the value of an optimal solution is defined by a recurrent formula, there are two approaches to implement a procedure computing this value. The first approach is **top-down with memoization**: the program is written recursively in a natural manner, but modified to save each subsolution (tipically in an array or hash table). The program first checks if a solution for the subproblem was already found. If so, it returns the saved value avoid to recompute the subsolution; if not, the procedure computes the value in the usual manner. The following C++ program implements a solution to the House Robber problem according to this approach.
 
 {% highlight cpp %}
 int rob_helper(vector<int>& nums, vector<int>& dp, int idx) {
@@ -61,14 +61,7 @@ int rob(vector<int>& nums) {
 }
 {% endhighlight %}
   
-The second approach is **bottom-up**: the subproblems are solved in order of size, such that solving a particular subproblem depends only on the solution of smaller subproblems. In this way, each sub-problem is solved only once and when it is solved, all subproblems its solution depends upon were already solved and the corresponding values were saved.. 
-
-When an optimal solution for a subproblem is computed, all the values of an optimal solution for smaller subproblems its solution depends upon were already computed and saved. 
-
-
-We evaluate the Fibonacci numbers from smallest to biggest and store all the results, so we know that we have
-
-and it depends on some notion of the “size” of a subproblem: the subproblem  This approach typically depends on some natural notion of the “size” of a subproblem, such that solving any par- ticular subproblem depends only on solving “smaller” subproblems. We sort the subproblems by size and solve them in size order, smallest first. When solving a particular subproblem, we have already solved all of the smaller subproblems its solution depends upon, and we have saved their solutions. We solve each sub- problem only once, and when we first see it, we have already solved all of its prerequisite subproblems. 
+The second approach is **bottom-up**: the subproblems are solved in order of size, such that solving a particular subproblem depends only on the solution of smaller subproblems. Each sub-problem is solved only once and when it is solved, all subproblems its solution depends upon were already solved and the corresponding values were saved. The following Python program implements a solution to the House Robber problem according to this approach. First it defines a solution for an array of length 1 and then it compute a solution for arrays of increasing size using the previous computed solution.
 
 {% highlight python %}
 def rob(self, nums):
@@ -89,5 +82,7 @@ def rob(self, nums):
   
   return max(dp_true[len(dp_true)-1], dp_false[len(dp_false)-1])
 {% endhighlight %}
+
+A more careful analysis shows that there is no need to store all the intermediate values for the entire period of execution. Because the recurrent formula depends only two arguments, we only need to retain the last two values we have seen:
 </div>
         
