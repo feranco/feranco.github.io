@@ -64,12 +64,22 @@ The second approach is **bottom-up**: the subproblems are solved in order of siz
 
 {% highlight python %}
 def rob(self, nums):
-  
-  #define the starting state
-  dp = [0]
+
+  #base cases
+  if len(nums) == 0 :
+    return 0
+        
+  if len(nums) == 1 :
+    return nums[0]
+
+  if len(nums) == 2 :
+      return = max(nums[0],nums[1])
+
+  #define the starting states
+  dp = [nums[0], max(nums[0],nums[1])]
   
   #compute all states in size order
-  for i in range(len(nums)) :
+  for i in range(2, len(nums)) :
       dp.append(max(dp[i-1] + nums[i], dp[i]))
 
   return dp[-1]
@@ -77,7 +87,7 @@ def rob(self, nums):
 
 The two approaches yield algorithms with the same asymptotic running time and space. For the House Robber problem both time and space are O(n), where n is the length of the array. A more careful analysis demonstrates that there is no need to store all the intermediate values for the entire period of execution. Because the recurrent formula depends only on the last two solutions, only the last two computed values need to be saved.
 
-##Construct an optimal solution
+## Construct an optimal solution
 
 ur dynamic-programming solutions to the rod-cutting problem return the value of an optimal solution, but they do not return an actual solution: a list of piece sizes. We can extend the dynamic-programming approach to record not only the optimal value computed for each subproblem, but also a choice that led to the optimal value. With this information, we can readily print an optimal solution.
 
