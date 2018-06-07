@@ -89,6 +89,6 @@ The two approaches yield algorithms with the same asymptotic running time and sp
 
 ## Construct an optimal solution
 
-ur dynamic-programming solutions to the rod-cutting problem return the value of an optimal solution, but they do not return an actual solution: a list of piece sizes. We can extend the dynamic-programming approach to record not only the optimal value computed for each subproblem, but also a choice that led to the optimal value. With this information, we can readily print an optimal solution.
+ur dynamic-programming solutions to the rod-cutting problem return the value of an optimal solution, but they do not return an actual solution: a list of piece sizes. We can extend the dynamic-programming approach to record not only the optimal value computed for each subproblem, but also a choice that led to the optimal value. With this information, we can readily print an optimal solution. The possible solutions to a given dynamic programming problem are described by paths through the dynamic programming matrix, starting from the initial con- figuration (the pair of empty strings (0, 0)) down to the final goal state (the pair The key to building the solution is to reconstruct the decisions made at every step along the optimal path that leads to the goal state. These decisions have been recorded in the parent field of each array cell.
 
         
