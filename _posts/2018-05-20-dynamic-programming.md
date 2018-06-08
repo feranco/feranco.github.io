@@ -89,8 +89,45 @@ The two approaches yield algorithms with the same asymptotic running time and sp
 
 ## Construct an optimal solution
 
-Sometimes a DP problem requires not only the value of an optimal solution, but also an actual solution. In this case, the DP approach shall be extended to save not only an optimal value for each subproblem, but also the choice that brings to this optimal value. For the House Robber problem, an actual solution consists in a list of houses and is described by a subsequence of the DP array starting from the initial state (an empty list of houses) down to the final state (the last robbed house). The key to building the solution is to reconstruct the decisions made at every step along the optimal path that leads to the goal state. These decisions have been recorded in the parent field of each array cell. With this information, we can readily print an optimal solution. 
+Sometimes a DP problem requires not only the value of an optimal solution, but also an actual solution. In this case, the DP approach shall be extended to save not only an optimal value for each subproblem, but also the choices leading to this optimal value. For the House Robber problem, an actual solution consists in a list of houses corrsponding to a subsequence of the DP array starting from the initial state (an empty list of houses) and ending in the final state (the last robbed house). The key to building the solution is to store for each house i its predecessor, that is the index of the house that was robbed immediately before i in an optimal solution ending at i. The following program saves these indices in the choice list and prints an optimal solution backtracking from the last robbed house. 
 
-The possible solutions to a given dynamic programming problem are described by paths through the dynamic programming matrix, starting from the initial con- figuration (the pair of empty strings (0, 0)) down to the final goal state (the pair The key to building the solution is to reconstruct the decisions made at every step along the optimal path that leads to the goal state. These decisions have been recorded in the parent field of each array cell. With this information, we can readily print an optimal solution. 
+{% highlight python %}
+
+def rob(self, nums):
+
+    if len(nums) == 0 :
+        return result
+
+    if len(nums) == 1 :
+        print(nums[0])
+        return nums[0]
+
+    if len(nums) == 2 :
+        print(max(nums[0],nums[1]))
+        return max(nums[0],nums[1])
+
+    choice = [-1,-1]
+    dp = [nums[0], max(nums[0],nums[1])] 
+    last = 1
+
+    for i in range(2, len(nums)) :
+        if dp[i-2] + nums[i] >= dp[i-1] :
+            last = i
+            choice.append(i-2)
+            dp.append(dp[i-2] + nums[i])
+        else :
+            choice.append(i-1)
+            dp.append(dp[i-1])
+
+    houses = []
+    while last != -1:
+        houses.append(nums[last])
+        last = choice[last]
+
+    for house in reversed(houses):
+        print(house)
+
+    return dp[-1]
+{% endhighlight %}
 
         
