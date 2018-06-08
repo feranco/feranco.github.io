@@ -95,39 +95,44 @@ Sometimes a DP problem requires not only the value of an optimal solution, but a
 
 def rob(self, nums):
 
-    if len(nums) == 0 :
-        return result
+  #base cases
+  if len(nums) == 0 :
+      return result
 
-    if len(nums) == 1 :
-        print(nums[0])
-        return nums[0]
+  if len(nums) == 1 :
+      print(nums[0])
+      return nums[0]
 
-    if len(nums) == 2 :
-        print(max(nums[0],nums[1]))
-        return max(nums[0],nums[1])
+  if len(nums) == 2 :
+      print(max(nums[0],nums[1]))
+      return max(nums[0],nums[1])
+      
+  #define the starting states
+  choice = [-1,-1]
+  dp = [nums[0], max(nums[0],nums[1])] 
+  last = 1
+  
+  #compute all states in size order saving decisions
+  for i in range(2, len(nums)) :
+      if dp[i-2] + nums[i] >= dp[i-1] :
+          last = i
+          choice.append(i-2)
+          dp.append(dp[i-2] + nums[i])
+      else :
+          choice.append(i-1)
+          dp.append(dp[i-1])
 
-    choice = [-1,-1]
-    dp = [nums[0], max(nums[0],nums[1])] 
-    last = 1
+  #reconstruct an optimal solution
+  houses = []
+  while last != -1:
+      houses.append(nums[last])
+      last = choice[last]
+  
+  #print the optimal solution
+  for house in reversed(houses):
+      print(house)
 
-    for i in range(2, len(nums)) :
-        if dp[i-2] + nums[i] >= dp[i-1] :
-            last = i
-            choice.append(i-2)
-            dp.append(dp[i-2] + nums[i])
-        else :
-            choice.append(i-1)
-            dp.append(dp[i-1])
-
-    houses = []
-    while last != -1:
-        houses.append(nums[last])
-        last = choice[last]
-
-    for house in reversed(houses):
-        print(house)
-
-    return dp[-1]
+  return dp[-1]
 {% endhighlight %}
 
         
