@@ -22,11 +22,13 @@ When developing a dynamic-programming algorithm, we follow a sequence of four st
 
 Let’s see the base of DP with the help of a simple problem that can be found in [Leetcode](https://leetcode.com/problems/house-robber/description/). The House Robber problem is defined as follows: 
 ```yaml
-A professional robber plans to rob houses along a street. Each house has a certain amount of money stashed, 
-the only constraint stopping the rob from robbing each of them is that adjacent houses have security system 
-connected and it will automatically contact the police if two adjacent houses were broken into. Given a list 
-of non-negative integers representing the amount of money of each house, the problem is to determine the maximum 
-amount of money that can be robbed without alerting the police.
+A professional robber plans to rob houses along a street. Each house has
+a certain amount of money stashed, the only constraint stopping the rob 
+from robbing each of them is that adjacent houses have security system 
+connected and it will automatically contact the police if two adjacent 
+houses were broken into. Given a list of non-negative integers giving
+the amount of money of each house, determine the maximum amount of money 
+that can be robbed without alerting the police.
 ```
 In abstract: given an array A of N integer, the problem is to find the maximum sum that can be computed without taking two consecutive numbers.
 
@@ -36,7 +38,7 @@ A Dynamic Programming solution is usually based on one (or more) starting state 
 
 ## Recursively define the value of an optimal solution.
 
-The second step is to find a recurrent formula computing an optimal solution for a state in terms of the optimal solution of smaller states. Such a formula can be defined by carefully analyzing the problem to be solved. In the case of House Robber problem, it can be observed that a generic array element i can be part or not be part of an optimal solution. If i is part of an optimal solution, the previous element i-1 cannot be part of an optimal solution and the solution for an array of length i is given by the value of the array element i plus an optimal solution of an array of length i-2. If i is not part of an optimal solution, the previous element i-1 can be part of an optimal solution and the solution for an array of length i is given by an optimal solution of an array of length i-2. So, an optimal solution S(i) for an array A of length i is given by S(i) = max (A[i] + S(i-2), S(i-1).
+The second step is to find a recurrent formula computing an optimal solution for a state in terms of the optimal solution of smaller states. Such a formula can be defined by carefully analyzing the problem to be solved. In the case of House Robber problem, it can be observed that a generic array element i can be part or not be part of an optimal solution. If i is part of an optimal solution, the previous element i-1 cannot be part of an optimal solution and the solution for an array of length i is given by the value of the array element i plus an optimal solution of an array of length i-2. If i is not part of an optimal solution, the previous element i-1 can be part of an optimal solution and the solution for an array of length i is given by an optimal solution of an array of length i-2. So, an optimal solution S(i) for an array A of length i is given by S(i) = max (A[i] + S(i-2), S(i-1)).
 
 ## Compute the value of an optimal solution. 
 
