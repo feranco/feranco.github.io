@@ -4,6 +4,7 @@ title: Dynamic Programming
 categories:
   - Algorithms
 tags:
+  - Dynamic Programming
   - Recursion
 last_modified_at: 2018-05-25T09:55:59-05:00
 ---
