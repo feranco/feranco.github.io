@@ -17,11 +17,11 @@ In abstract, given a 2D array find the number of paths to move from the top-left
 An optimal solution is represented by the number of paths to move from the top-left corner to any other cell of the grid. 
 
 ## Recursively define the value of an optimal solution
-The key observation is that each cell of the grid can be reached only from left or up. So, an optimal solution S(i) for a generic cell with coordinates (i.j) is given by S(i,j) = S(i-1,j) + S(i,j-1).
+The key observation is that each cell of the grid can be reached only from left or up. So, an optimal solution S for a generic cell with coordinates (i.j) is given by S(i,j) = S(i-1,j) + S(i,j-1).
 
 ## Compute the value of an optimal solution 
 
-The first approach is **top-down with memoization**: 
+The following c++ program implements a solution according to the **top-down with memoization** approach: 
 
 {% highlight cpp %}
  int uniquePaths(int m, int n) {
@@ -48,10 +48,10 @@ int uniquePathsHelper(int m, int n, vector<vector<int>>& dp) {
 }
 {% endhighlight %}
 
-The first approach is **bottom-up**: 
+The following python program implements a solution according to the **bottom-up** approach: 
 
 {% highlight python %}
-def uniquePaths(self, m, n):
+def uniquePaths(m, n):
 
         if m <= 0 or n <= 0 :
             return 0
@@ -75,4 +75,36 @@ def uniquePaths(self, m, n):
                 dp[i][j] = dp[i-1][j] + dp[i][j-1]
                 
         return dp[n-1][m-1]
+{% endhighlight %}
+
+An extension of this problem considers that some obstacles are added to the grid, so that it's not possible to move in a cell with an obstacle. The recurrence formula defining the value of an optimal solution is very similar to the previous one, except that S(i,j) = 0 if the cell (i,j) contains an obstacle. The following python programs solves this problem, assuming that the value of a cell is 1 if there is an onstacle and 0 otherwise:
+
+{% highlight python %}
+def uniquePathsWithObstacles (obstacleGrid):
+
+  rows = len(obstacleGrid)    # 3 rows in your example
+  cols = len(obstacleGrid[0])
+
+  if rows <= 0 or cols <= 0 :
+    return 0
+
+  dp = [[0]*cols for i in range(rows)] 
+  
+  #define starting states
+  for x in range(rows) :
+    if obstacleGrid[x][0] == 1 :
+      break
+    dp[x][0] = 1
+
+  for y in range(cols) :
+    if obstacleGrid[0][y] == 1 :
+      break
+    dp[0][y] = 1
+
+  for x in range(1,rows) :
+      for y in range(1,cols) :
+        dp[x][y] = dp[x-1][y] + dp[x][y-1] if obstacleGrid[x][y] == 0 else 0
+
+  return dp[rows-1][cols-1]
+
 {% endhighlight %}
