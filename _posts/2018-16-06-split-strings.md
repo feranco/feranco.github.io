@@ -33,6 +33,6 @@ std::regex sep ("[ ,.]+");
 std::sregex_token_iterator tokens(text.cbegin(), text.cend(), sep, -1);
 std::sregex_token_iterator end;
 for(; tokens != end; ++tokens){
-      std::cout << "token found: " << *tokens << "\n";
+      std::cout << "utoken found: " << *tokens << "\n";
 }
 {% endhighlight %}
