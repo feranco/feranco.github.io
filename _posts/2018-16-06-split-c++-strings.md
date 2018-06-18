@@ -24,3 +24,15 @@ std::vector<std::string> split(const std::string& input, char delimiter)
    return output;
 }
 {% endhighlight %}
+
+Regex solution in case of multiple delimiters.
+{% highlight cpp %} 
+std::sregex_token_iterator 
+
+std::regex sep ("[ ,.]+");
+std::sregex_token_iterator tokens(text.cbegin(), text.cend(), sep, -1);
+std::sregex_token_iterator end;
+for(; tokens != end; ++tokens){
+      std::cout << "token found: " << *tokens << "\n";
+}
+{% endhighlight %}
