@@ -1,4 +1,4 @@
-2---
+---
 layout: post
 title: String to integer conversion in C++
 categories:
