@@ -1,10 +1,8 @@
-
 ---
 layout: post
 title: Sort function in C++ STL
 categories:
   - Programming
-  - Algorithms
 tags:
   - C++
   - Sorting
