@@ -1,4 +1,16 @@
 
+---
+layout: post
+title: Sort function in C++ STL
+categories:
+  - Programming
+  - Algorithms
+tags:
+  - C++
+  - Sorting
+last_modified_at: 2018-06-20T11:19:59-05:00
+---
+
 The sort() function declared in <algorithm> can be a very useful tool to sort containers supporting random-access iterators like std::array, std::vectors and std::deque. The function can take up to three parameters:
   
 * RandomAccessIterator first The first parameter is where you will be putting a iterator(Pointer) to the first element in the range that you want to sort. The sort will include the element that the iterator points to.
