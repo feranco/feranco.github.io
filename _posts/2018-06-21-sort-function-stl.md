@@ -19,4 +19,7 @@ The sort() function declared in <algorithm> can be a very useful tool to sort pr
   void sort ( RandomAccessIterator first, RandomAccessIterator last, Compare comp );
 % endhighlight %  
 
-The first two parameters define the range to sort as [first,Last) meaning that it includes the element pointed by the first but it doesn’t include the element pointed by last. The third parameter is optional and it is used to customize how the sort is performed. For example if you have a struct that has 3 different variables in it, how does the function know which one to sort? Or how does it know how it should sort it? This is what this parameter is for. I will explain this more in a bit.
+The first two parameters define the range to sort as [first,Last) meaning that it includes the element pointed by the first but it doesn’t include the element pointed by last. The third parameter is optional and it is used to customize how the sort is performed. 
+
+It is a function taking two elements in the range as arguments and returning a value convertible to bool that indicates whether the element passed as first argument is considered to preceed the second in the specific strict weak ordering it defines.
+
