@@ -15,7 +15,7 @@ Convert a string to an number is a quite common task in C++. This post summarize
 The first method is to construct an input stringstream initialized with the string to be converted and then reading the value into a variable using the >> operator. 
 
 {% highlight cpp %}
-template <class T> T stringToNum (string s) {
+template <class T> T stringToNum (const string& s) {
    T value;
    istringstream is(s);
    //set number to 0 if an error occur
@@ -23,7 +23,7 @@ template <class T> T stringToNum (string s) {
 }
 {% endhighlight %}  
   
-The second method is to use one of the following functions declared in <string>:
+A second method is to use one of the following functions introduced in <string> with C++11:
 * stoi, stol, stoll that converts from a string to an integer; 
 * stof, stod, stold that converts from a string to a floating-point value. 
 
@@ -31,3 +31,22 @@ The second method is to use one of the following functions declared in <string>:
 string s = "1927";
 int number = stoi(s);
 {% endhighlight %}
+
+A third method is to use the C library function sscanf as in the following example:
+
+{% highlight cpp %}
+#include <string>
+#include <cstdio>
+ 
+bool string2Int(const std::string& s, int& number)
+{
+    int result = sscanf (s.c_str(), "%d", &number);
+    // check if something went wrong during the conversion
+    if ( !Succeeded || Succeeded == EOF )
+      result = 0;
+
+    return result;
+}
+{% endhighlight %}
+
+Using %f in place of "%d"
