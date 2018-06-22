@@ -83,11 +83,17 @@ template <class T> std::string numToString(T value)
 
 This function is overloaded with different integer and floating-point types so that it can safely convert to string every number.
 
-int Number = 123; // number to convert
+A third method is to use the C library function sprintf as in the following example converting an integer to a string:
+{% highlight cpp %}
+std::string int2String(int number)
+{
+  int number = 1927; 
+  char cstring[MAX_NUMBER_LENGTH];
+  sprintf ( cstring, "%d", number ); 
+  return std::string(cstring);
+{% endhighlight %}
 
-char Result[16]; // string which will contain the number
-
-sprintf ( Result, "%d", Number ); // %d makes the result be a decimal integer 
+Using "%f" in place of "%d" allows to convert a floating-point value into a string.
 
 [comment]: # (http://www.cplusplus.com/articles/D9j2Nwbp/)
 [comment]: # (http://www.cplusplus.com/forum/general/208135/)
