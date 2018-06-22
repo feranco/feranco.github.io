@@ -29,7 +29,7 @@ A second method is to use one of the following functions introduced in <string> 
 
 {% highlight cpp %}
 std::string s = "1927";
-int number = stoi(s);
+int number = std::stoi(s);
 {% endhighlight %}
 
 A third method is to use the C library function sscanf as in the following example converting a string to an integer:
@@ -52,3 +52,39 @@ bool string2Int(const std::string& s, int& number)
 Using "%f" in place of "%d" allows to convert a string to a floating-point value.
 
 ##Number to string conversion
+
+The first method is to write the number to be converted into an output stringstream using the << operator and then getting the string using the str() member function. 
+
+{% highlight cpp %}
+template <class T> string numToString(T value)
+{
+   ostringstream os;
+   os << value;
+   return os.str();
+}
+{% endhighlight %}  
+  
+It worth to observe that stringstreams manipulators can be used to customize the format of the resulting string. For example 
+
+{% highlight cpp %}
+os << fixed << setprecision(3) << value; 
+{% endhighlight %}  
+
+set bla bla.
+
+A second method is to use the function std::to_string() introduced in <string> with C++11:
+
+{% highlight cpp %}
+template <class T> std::string numToString(T value)
+{
+  return std::to_string(value);
+}
+{% endhighlight %} 
+
+This function is overloaded with different integer and floating-point types so that it can safely convert to string every number.
+
+int Number = 123; // number to convert
+
+char Result[16]; // string which will contain the number
+
+sprintf ( Result, "%d", Number ); // %d makes the result be a decimal integer 
