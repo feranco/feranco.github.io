@@ -88,3 +88,6 @@ int Number = 123; // number to convert
 char Result[16]; // string which will contain the number
 
 sprintf ( Result, "%d", Number ); // %d makes the result be a decimal integer 
+
+[comment]: <> (http://www.cplusplus.com/articles/D9j2Nwbp/)
+[comment]: <> (http://www.cplusplus.com/forum/general/208135/)
