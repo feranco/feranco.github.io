@@ -5,8 +5,10 @@ categories:
   - Programming
 tags:
   - OOP
+  - Design Patterns
   - C++
 last_modified_at: 2018-07-20T13:50:59-05:00
+---
 
 Creational design patterns introduces different mechanisms to create objects in a controlled way in order to increse the flexibility in deciding which objects need to be
 created for a given case. Indeed, creating objects directly with the new operator can be harmful as the objects are scattered all over the application, causing a tightly
