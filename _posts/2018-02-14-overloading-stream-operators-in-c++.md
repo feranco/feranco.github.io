@@ -4,6 +4,7 @@ title: "Overloading Stream Operators in C++"
 categories:
   - C++
 tags:
+  - C++
   - Programming
 last_modified_at: 2018-02-14T09:55:59-05:00
 ---
