@@ -5,13 +5,15 @@ categories:
   - Algorithms
 tags:
   - Array
-last_modified_at: 2017-11-14T10:55:59-05:00
+last_modified_at: 2018-01-22T22:14:59-05:00
 ---
 
-The problem of left-rotate an N-elements array A by P positions is an example on how a simple problem can have many different solutions. This post resume some possible solutions sorting them in increasing order of space and time efficiency. 
+The problem of left-rotate an N-elements array A by P positions is an example on how a simple problem can have many different solutions. This post summarises some possible algorithms to solve this problem, sorting them in increasing order of space and time efficiency. 
 
 ## Base approach
-A simple approach is to copy the first P element of A to a temporary array, move the remaining N-P element at the beginning of A and then copying the elements in the temporary array afterwards. Unfortunately, this approach is not space-efficient, since it requires O(P) extra space. Another simple approach is to implement a function that left shift all elements of A by one position and call this function N-times. The drawback of this approach is that it is not time efficient, since each function call requires O(n) time.
+A simple approach is to copy the first P element of A to a temporary array, move the remaining N-P element at the beginning of A and copy back the elements in the temporary array afterwards. Unfortunately, this approach is not space-efficient, since it requires O(P) extra space. Another simple approach is to implement a function that shift all elements of A by one position to the left and call this function N-times. The drawback of this approach is that it is not time efficient, since it requires O(n<sup>2</sup>) time (O(n) time for each function call).
+
+## Mathematic approach
 
 Instead of moving each element by one position, a better approach is to save A[0] in a temporary variable and find a permutation that moves A[P-1] in A[0], A[2P-1] in A[P-1] and so on, considering all indices modulo N. When an element should be moved from A[0] divide the array, the process stops and the element is moved from the temporary variable. If this permutation doesn't move all the elements, the process is repeated starting moving A[P-2] in A[1] and so on until all elements are moved. The trick to implement this approach is to understand that the number of permutations necessary to rotate the array corresponds to the Greatest Common Divisor of N and P. Indeed each permutation moves elements incrementing by P and stops when it gets back to the starting point. So the number of spans for each permutation is a specific multiple of N that corresponds to the Least Common Multiple of N and P and the number of movements in each permutation is LCM(N, P) / P. Therefore the total number of permutations is N / (LCM(N,P) / P), which is equal to GCD(N,P). The following C++ code is an implementation of this approach:
 
@@ -46,6 +48,8 @@ vector<T> rotate (vector<T> a, unsigned int p) {
   return a;
 } 
 {% endhighlight %}
+
+## Divide et impera approach
 
 Another different way to solve the problem is to use the divide et impera paradigma. The key of this approach is to note that the array A is composed by two segments S1 and S2, where S1 includes the first P elements of A. If the size of S2 is greater than the on of S1, it is possible to split S2 into two segments S2_left and S2_right. S2_right has size equal to A and S2_left has size S2-S2_right. Swapping S1 and S2_right generates a new array S2_rightS2_leftS1 that has S1 in its proper place after rotation. The problem is now to swap S2_right ans S2_left. Since this problem is the same of the original one, it isposibl to solve it recursively according to the divide et impera paradigma. The following C++ code is a recursive implementation of this approach:
 
