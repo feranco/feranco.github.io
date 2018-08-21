@@ -2,9 +2,9 @@
 layout: post
 title: "Overloading Stream Operators in C++"
 categories:
-  - Programming
-tags:
   - C++
+tags:
+  - Programming
 last_modified_at: 2018-02-14T09:55:59-05:00
 ---
 
