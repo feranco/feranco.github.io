@@ -29,7 +29,7 @@ int gcd (int a, int b) {
 template <typename T>
 std::vector<T> rotate (std::vector<T> a, unsigned int p) {
   
-  const int n = a.size();
+  const unsigned int n = a.size();
   
   if (p >= n) p = p % n;
 
@@ -61,7 +61,6 @@ vector<T> rotate (vector<T> a, size_t l, size_t m, size_t r) {
   size_t size_left = m-l+1, size_right = r-m;
   
   if (size_left == size_right) {
-    cout << "l " << l << " m " << m << " r " << r << "\n";
     int i = l, j = m+1;
     while (i <= m) {
       swap(a[i++],a[j++]);
@@ -74,20 +73,14 @@ vector<T> rotate (vector<T> a, size_t l, size_t m, size_t r) {
     while (i <= m) {
       swap(a[i++],a[j++]);
     }
-    for (int x : a) cout << x << " " ;
-    cout << "\n";
-    cout << "l " << l << " m " << m << " r " << r-m+l-1 << "\n";
-    return rotateDI (a, l, m, r-m+l-1);
+    return rotate (a, l, m, r-m+l-1);
   }
   else {
     int i = m+1, j = l;
     while (i <= r) {
       swap(a[i++], a[j++]);
     }
-    for (int x : a) cout << x << " " ;
-    cout << "\n";
-    cout << "l " << l+r-m << " m " << m << " r " << r<< "\n";
-    return rotateDI(a, l+r-m, m, r);
+    return rotate(a, l+r-m, m, r);
   }
 }
 
