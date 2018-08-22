@@ -56,7 +56,7 @@ Another different way to solve the problem is to use the divide et impera paradi
 
 {% highlight cpp %} 
 template <typename T>
-vector<T> rotate (vector<T> a, size_t l, size_t m, size_t r) {
+std::vector<T> rotate (std::vector<T> a, size_t l, size_t m, size_t r) {
   
   size_t size_left = m-l+1, size_right = r-m;
   
@@ -85,7 +85,7 @@ vector<T> rotate (vector<T> a, size_t l, size_t m, size_t r) {
 }
 
 template <typename T>
-vector<T> rotate (vector<T> a, unsigned int p) {
+std::vector<T> rotate (std::vector<T> a, unsigned int p) {
   return rotate(a, 0, p-1, a.size()-1);
 }
   
