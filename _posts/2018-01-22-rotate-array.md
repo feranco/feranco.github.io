@@ -61,7 +61,7 @@ std::vector<T> rotate (std::vector<T> a, size_t l, size_t m, size_t r) {
   size_t size_left = m-l+1, size_right = r-m;
   
   if (size_left == size_right) {
-    int i = l, j = m+1;
+    size_t i = l, j = m+1;
     while (i <= m) {
       swap(a[i++],a[j++]);
     }
@@ -69,14 +69,14 @@ std::vector<T> rotate (std::vector<T> a, size_t l, size_t m, size_t r) {
   }
   
   if (size_left < size_right) {
-    int i = l, j = r-(m-l);//std::max(r-m,m+1);
+    size_t i = l, j = r-(m-l);
     while (i <= m) {
       swap(a[i++],a[j++]);
     }
     return rotate (a, l, m, r-m+l-1);
   }
   else {
-    int i = m+1, j = l;
+    size_t i = m+1, j = l;
     while (i <= r) {
       swap(a[i++], a[j++]);
     }
