@@ -30,13 +30,14 @@ template <typename T>
 std::vector<T> rotate (std::vector<T> a, unsigned int p) {
   
   const int n = a.size();
+  
   if (p >= n) p = p % n;
 
   int loops = gcd(n, p);
 
   for (size_t i = 0; i < loops; ++i) {
-    size_t k = i;
-    size_t j = (i + p) % n;
+    size_t k = i; //destination index
+    size_t j = (i + p) % n; //source index
     T tmp = a[k];
     while (j != i) {
       a[k] = a[j];
