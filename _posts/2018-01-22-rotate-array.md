@@ -54,15 +54,16 @@ The time complexity is O(n), since each element is moved exactly once. The space
 
 ## Divide et impera approach
 
-Another different way to solve the problem is to use the divide et impera paradigma. The key of this approach is to note that the array A is composed by two segments *S1* and *S2*, where *S1* includes the first P elements of A. If *S1* and *S2* have the same size, the problem can be simply solved swapping the two segments. If the size of *S2* is greater than the one of *S1*, it is possible to split S2 into two segments *S2<sup>\'</sup>* and *S2<sup>\'\'</sup>*. *S2<sup>\'\'</sup>* has size equal to *S1* and *S2<sup>\'</sup>* has size S2-S2_right. Swapping S1 and S2_right generates a new array S2_rightS2_leftS1 that has S1 in its proper place after rotation. The problem is now to swap S2_right ans S2_left. Since this problem is the same of the original one, it is possible to solve it recursively according to the divide et impera paradigma. The following C++ code is a recursive implementation of this approach:
+Another different way to solve the problem is to use the divide et impera paradigma. The key of this approach is to note that the array A is composed by two segments *S1* and *S2*, where *S1* includes the first P elements of A. If *S1* and *S2* have the same size, the problem can be simply solved swapping the two segments. If the size of *S2* is greater than the one of *S1*, it is possible to split *S2* into two segments *S2<sup>\'</sup>* and *S2<sup>\'\'</sup>* where *S2<sup>\'\'</sup>* has size equal to *S1*. Swapping *S1* and *S2<sup>\'\'</sup>* generates a new array A*<sup>\'</sup> = \[*S2<sup>\'\'</sup>*,*S2<sup>\'</sup>*,*S1*\] that has *S1* in its proper place after rotation. The problem is now reduced to swap *S2<sup>\'\'</sup>* ans *S2<sup>\'</sup>*. Since this problem has the same form of the original one, it can be recursively solved according to the divide et impera paradigma. The following C++ code is an implementation of this approach:
 
 {% highlight cpp %} 
 template <typename T>
-std::vector<T> rotate (std::vector<T> a, size_t l, size_t m, size_t r) {
+std::vector<T> rotate (std::vector<T> a, int l, int m, int r) {
   
-  size_t size_left = m-l+1, size_right = r-m;
+  int sizeS1 = m-l+1, sizeS2 = r-m;
   
-  if (size_left == size_right) {
+  // Base case
+  if (sizeS1 == sizeS2) {
     size_t i = l, j = m+1;
     while (i <= m) {
       swap(a[i++],a[j++]);
@@ -70,19 +71,19 @@ std::vector<T> rotate (std::vector<T> a, size_t l, size_t m, size_t r) {
     return a;
   }
   
-  if (size_left < size_right) {
-    size_t i = l, j = r-(m-l);
-    while (i <= m) {
-      swap(a[i++],a[j++]);
+  if (sizeS1 < sizeS2) {
+    // Swap S1 with the upper part of S2
+    for (int i = 0; i < sizeS1; ++i) {
+        std::swap(a[m--],a[r--]);
     }
-    return rotate (a, l, m, r-m+l-1);
+    return rotate (a, l, l+sizeS1-1, r);
   }
   else {
-    size_t i = m+1, j = l;
-    while (i <= r) {
-      swap(a[i++], a[j++]);
+    // Swap S2 with the lower part of S1
+    for (int i = 0; i < sizeS2; ++i) {
+        std::swap(a[l++],a[++m]);
     }
-    return rotate(a, l+r-m, m, r);
+    return rotate(a, l, r-sizeS2, r);
   }
 }
 
