@@ -64,9 +64,8 @@ std::vector<T> rotate (std::vector<T> a, int l, int m, int r) {
   
   // Base case
   if (sizeS1 == sizeS2) {
-    size_t i = l, j = m+1;
-    while (i <= m) {
-      swap(a[i++],a[j++]);
+    for (int i = 0; i < sizeS1; ++i) {
+        std::swap(a[l++],a[r++]);
     }
     return a;
   }
@@ -81,7 +80,8 @@ std::vector<T> rotate (std::vector<T> a, int l, int m, int r) {
   else {
     // Swap S2 with the lower part of S1
     for (int i = 0; i < sizeS2; ++i) {
-        std::swap(a[l++],a[++m]);
+        //m is the last position in S1, so has prefix increment
+        std::swap(a[l++],a[++m]);  
     }
     return rotate(a, l, r-sizeS2, r);
   }
