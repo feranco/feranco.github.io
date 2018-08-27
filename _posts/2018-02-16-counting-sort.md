@@ -8,7 +8,7 @@ tags:
 last_modified_at: 2018-03-26T23:55:59-05:00
 ---
 
-While all comparison-based algorithms have a time complexity of O(nlog<sub>n<\sub>), there are other algorithms running in linear time provided that some assumptions about the input are verified. Counting sort is an algorithm that has a time complexity of O(n), assuming that each of the n input elements is an integer in the range 0 to k or has an integer key in that range. Counting sort uses two temporary arrays:
+While all comparison-based algorithms have a time complexity of O(nlog<sub>n</sub>), there are other algorithms running in linear time provided that some assumptions about the input are verified. Counting sort is an algorithm that has a time complexity of O(n), assuming that each of the n input elements is an integer in the range 0 to k or has an integer key in that range. Counting sort uses two temporary arrays:
 * an integer array of size k specifying, for each element x, the number of input elements with key less or equal to x;
 * an array of size n, where to insert the sorted elements.  
 
