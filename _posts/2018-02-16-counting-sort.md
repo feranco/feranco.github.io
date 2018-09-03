@@ -15,7 +15,6 @@ While all comparison-based algorithms have a time complexity of O(nlog<sub>n</su
 Basically, the counting sort is composed by three cycles. The first iterates through the keys of the input array and fills the temporary array of size k so that it specifies, for each element x, the number of elements equal to x. Considering the role played by this temporary array, in the following we can refer to it as the **counter** array. The second iterates through the counter array, updating it so that each element represents the number of input elements with key less or equal to x. The third iterates through the input array using the information in the counter array to place each element x directly into its position in the temporary output array of size n. For example, if 5 elements are less or equal than x, then x belongs in output position 5. The number of elements less or equal than x in the counter array is then decreased in order to handle the situation in which more input elements have the same key. At the end of this step the output array contains all the sorted input elements and it is copied back to the input array. An important property of counting sort is that it is **stable**: numbers with the same value appear in the output array in the same order as they do in the input array.
 
 {% highlight cpp %} 
-
 #include <utility>
 #include <vector>
 
@@ -46,5 +45,4 @@ vector<T> countingSort (vector<T>* a_ptr, const vector<int>& keys, int k) {
 
   return b;
 }
-
 {% endhighlight %}  
