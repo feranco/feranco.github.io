@@ -16,14 +16,13 @@ Basically, the counting sort is composed by three cycles. The first iterates thr
 
 {% highlight cpp %} 
 
-#include <iostream>
 #include <utility>
 #include <vector>
 
-using namespace std;
+using std::vector;
 
 template <typename T>
-void countingSort (vector<T>* a_ptr, const vector<int>& keys, int k) {
+vector<T> countingSort (vector<T>* a_ptr, const vector<int>& keys, int k) {
 
   vector<T>& a = *a_ptr;
   vector<int> counter(k);
@@ -45,8 +44,7 @@ void countingSort (vector<T>* a_ptr, const vector<int>& keys, int k) {
         b[--counter[it->first]] = *it; 
   }
 
-  // copy b to a
-  a = b;
+  return b;
 }
 
 {% endhighlight %}  
