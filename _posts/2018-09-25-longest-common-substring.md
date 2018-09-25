@@ -18,6 +18,7 @@ An optimal solution is represented by the longest common suffix for all pairs of
 - $A_{i} = \[a_{0}, a_{1}, ..., a_{i}\]$ a prefix of $A$,
 - $B_{j} = \[b_{0}, b_{1}, ..., b_{j}\]$ a prefix of $B$, 
 - LCSuffix(A<sub>i</sub>,B<sub>j</sub>) a function retrieving the longest common suffix for the given prefixes,
+
 the longest common substring of A and B is given by LCS = $\max_{0 \leq i \leq m, 0 \leq j \leq n}LCSuffix(A_{i},$B_{j})$.  
 
 ## Recursively define the value of an optimal solution
