@@ -11,12 +11,12 @@ last_modified_at: 2018-06-07T08:55:59-05:00
 
 Problem definition: [Leetcode](https://leetcode.com/problems/unique-paths/description/).
 
-Given two strings $A = \[a_{0}, a_{1}, ..., a_{n}\]$ and B = = <b<sub>0</sub>, b<sub>1</sub>, ..., b<sub>n</sub>>, find the longest common substring (LCS and return its length.
+Given two strings $A = \[a_{0}, a_{1}, ..., a_{n}\]$ and $B = \[b_{0}, b_{1}, ..., b_{n}\]$, find the longest common substring (LCS and return its length.
 
 ## Define the structure of an optimal solution
-An optimal solution is represented by the longest common suffix for all pairs of prefixes of the strings. Formally, defining A<sub>i</sub> = <a<sub>0</sub>, a<sub>1</sub>, ..., a<sub>i</sub>> a prefix of A, B<sub>j</sub> = <b<sub>0</sub>, b<sub>1</sub>, ..., b<sub>j</sub>> a prefix of B and LCSuffix(A<sub>i</sub>,B<sub>j</sub>) a function retrieving the longest common suffix for the given prefixes, the longest common substring of A and B is given by LCS = max<sub>i,j</sub>LCSuffix(A<sub>i</sub>,B<sub>j</sub>). Since the longest common suffix 
+An optimal solution is represented by the longest common suffix for all pairs of prefixes of the strings. Formally, defining $A_{i} = \[a_{0}, a_{1}, ..., a_{i}$ a prefix of $A$, $B_{j} = \[b_{0}, b_{1}, ..., b_{j}$ a prefix of $B$ and LCSuffix(A<sub>i</sub>,B<sub>j</sub>) a function retrieving the longest common suffix for the given prefixes, the longest common substring of A and B is given by LCS = $\max_{0 \leq i \leq m, \max_{0 \leq j \leq n}$ max<sub>i,j</sub>LCSuffix(A<sub>i</sub>,B<sub>j</sub>).  
 ## Recursively define the value of an optimal solution
-The key observation is that each cell of the grid can be reached only from left or up. So, an optimal solution S for a generic cell with coordinates (i.j) is given by S(i,j) = S(i-1,j) + S(i,j-1).
+The longest common suffix 
 
 ## Compute the value of an optimal solution 
 
