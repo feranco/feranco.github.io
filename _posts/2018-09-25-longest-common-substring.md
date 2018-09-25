@@ -10,7 +10,7 @@ last_modified_at: 2018-06-07T08:55:59-05:00
 ---
 
 Problem definition: [Leetcode](https://leetcode.com/problems/unique-paths/description/).
-
+$\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}$
 Given two strings A = <a_{0}, a<sub>1</sub>, ..., a<sub>m</sub>> and B = = <b<sub>0</sub>, b<sub>1</sub>, ..., b<sub>n</sub>>, find the longest common substring (LCS and return its length.
 
 ## Define the structure of an optimal solution
