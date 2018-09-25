@@ -14,7 +14,7 @@ Problem definition: [Leetcode](https://leetcode.com/problems/unique-paths/descri
 Given two strings $A = \[a_{0}, a_{1}, ..., a_{n}\]$ and $B = \[b_{0}, b_{1}, ..., b_{n}\]$, find the longest common substring (LCS and return its length.
 
 ## Define the structure of an optimal solution
-An optimal solution is represented by the longest common suffix for all pairs of prefixes of the strings. Formally, defining $A_{i} = \[a_{0}, a_{1}, ..., a_{i}$ a prefix of $A$, $B_{j} = \[b_{0}, b_{1}, ..., b_{j}$ a prefix of $B$ and LCSuffix(A<sub>i</sub>,B<sub>j</sub>) a function retrieving the longest common suffix for the given prefixes, the longest common substring of A and B is given by LCS = $\max_{0 \leq i \leq m, \max_{0 \leq j \leq n}$ max<sub>i,j</sub>LCSuffix(A<sub>i</sub>,B<sub>j</sub>).  
+An optimal solution is represented by the longest common suffix for all pairs of prefixes of the strings. Formally, defining $A_{i} = \[a_{0}, a_{1}, ..., a_{i}$ a prefix of $A$, $B_{j} = \[b_{0}, b_{1}, ..., b_{j}$ a prefix of $B$ and LCSuffix(A<sub>i</sub>,B<sub>j</sub>) a function retrieving the longest common suffix for the given prefixes, the longest common substring of A and B is given by LCS = $\max_{0 \leq i \leq m, 0 \leq j \leq n}$ max<sub>i,j</sub>LCSuffix(A<sub>i</sub>,B<sub>j</sub>).  
 ## Recursively define the value of an optimal solution
 The longest common suffix 
 
