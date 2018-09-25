@@ -11,7 +11,7 @@ last_modified_at: 2018-06-07T08:55:59-05:00
 
 Problem definition: [Leetcode](https://leetcode.com/problems/unique-paths/description/).
 
-Given two strings $A = <a_{0}, a_{1}, ..., a_{n}>$ and B = = <b<sub>0</sub>, b<sub>1</sub>, ..., b<sub>n</sub>>, find the longest common substring (LCS and return its length.
+Given two strings $A = \[a_{0}, a_{1}, ..., a_{n}\]$ and B = = <b<sub>0</sub>, b<sub>1</sub>, ..., b<sub>n</sub>>, find the longest common substring (LCS and return its length.
 
 ## Define the structure of an optimal solution
 An optimal solution is represented by the longest common suffix for all pairs of prefixes of the strings. Formally, defining A<sub>i</sub> = <a<sub>0</sub>, a<sub>1</sub>, ..., a<sub>i</sub>> a prefix of A, B<sub>j</sub> = <b<sub>0</sub>, b<sub>1</sub>, ..., b<sub>j</sub>> a prefix of B and LCSuffix(A<sub>i</sub>,B<sub>j</sub>) a function retrieving the longest common suffix for the given prefixes, the longest common substring of A and B is given by LCS = max<sub>i,j</sub>LCSuffix(A<sub>i</sub>,B<sub>j</sub>). Since the longest common suffix 
