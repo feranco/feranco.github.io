@@ -22,7 +22,7 @@ An optimal solution is represented by the longest common suffix for all pairs of
 the longest common substring of A and B is given by LCS = $\max_{0 \leq i \leq m, 0 \leq j \leq n}LCSuffix(A_{i},$B_{j})$.  
 
 ## Recursively define the value of an optimal solution
-The longest common suffix 
+The longest common suffix can be recursively computed according to the following formula:
 
 ## Compute the value of an optimal solution 
 
