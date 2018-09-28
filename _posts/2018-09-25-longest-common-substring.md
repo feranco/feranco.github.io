@@ -15,14 +15,19 @@ Given two strings $A = \[a_{0}, a_{1}, ..., a_{n}\]$ and $B = \[b_{0}, b_{1}, ..
 
 ## Define the structure of an optimal solution
 An optimal solution is represented by the longest common suffix for all pairs of prefixes of the strings. Defining 
-- $A_{i} = \[a_{0}, a_{1}, ..., a_{i}\]$ a prefix of $A$,
-- $B_{j} = \[b_{0}, b_{1}, ..., b_{j}\]$ a prefix of $B$, 
-- LCSuffix(A<sub>i</sub>,B<sub>j</sub>) a function retrieving the longest common suffix for the given prefixes,
+- $A_{i} = \[a_{0}, a_{1}, ..., a_{i}\]$ a prefix of $A$;
+- $B_{j} = \[b_{0}, b_{1}, ..., b_{j}\]$ a prefix of $B$; 
+- $LCSuffix(A_{i},B_{j})$ a function retrieving the longest common suffix for the given prefixes;
 
-the longest common substring of A and B is given by LCS = $\max_{0 \leq i \leq m, 0 \leq j \leq n}LCSuffix(A_{i},$B_{j})$.  
+the longest common substring of A and B is given by LCS = $\max_{0 \leq i \leq m, 0 \leq j \leq n}LCSuffix(A_{i},B_{j})$.  
 
 ## Recursively define the value of an optimal solution
 The longest common suffix can be recursively computed according to the following formula:
+  $LCSuffix(A_{i},B_{j})$ =
+\begin{cases}
+LCSuffix(A_{i+1},B_{j+1}) + 1,  & \text{if a_{i} = b_{j}} \\
+0, & \text{if a_{i} \neq b_{j}}
+\end{cases}
 
 ## Compute the value of an optimal solution 
 
