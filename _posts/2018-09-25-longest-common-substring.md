@@ -11,7 +11,7 @@ last_modified_at: 2018-06-07T08:55:59-05:00
 
 Problem definition: [Leetcode](https://leetcode.com/problems/unique-paths/description/).
 
-Given two strings $A = \[a_{0}, a_{1}, ..., a_{n}\]$ and $B = \[b_{0}, b_{1}, ..., b_{n}\]$, find the longest common substring (LCS and return its length.
+Given two strings $A = \[a_{0}, a_{1}, ..., a_{n}\]$ and $B = \[b_{0}, b_{1}, ..., b_{n}\]$, find the longest common substring and return its length.
 
 ## Define the structure of an optimal solution
 An optimal solution is represented by the longest common suffix for all pairs of prefixes of the strings. Defining 
@@ -19,11 +19,12 @@ An optimal solution is represented by the longest common suffix for all pairs of
 - $B_{j} = \[b_{0}, b_{1}, ..., b_{j}\]$ a prefix of $B$; 
 - $LCSuffix(A_{i},B_{j})$ a function retrieving the longest common suffix for the given prefixes;
 
-the longest common substring of A and B is given by LCS = $\max_{0 \leq i \leq m, 0 \leq j \leq n}LCSuffix(A_{i},B_{j})$.  
+the longest common substring of A and B corresponds to $\max_{0 \leq i \leq m, 0 \leq j \leq n}LCSuffix(A_{i},B_{j})$.  
 
 ## Recursively define the value of an optimal solution
 The longest common suffix can be recursively computed according to the following formula:
-  $LCSuffix(A_{i},B_{j})$ =
+
+$LCSuffix(A_{i},B_{j})$ =
 \begin{cases}
 LCSuffix(A_{i+1},B_{j+1}) + 1,  & \text{if a_{i} = b_{j}} \\
 0, & \text{if a_{i} \neq b_{j}}
