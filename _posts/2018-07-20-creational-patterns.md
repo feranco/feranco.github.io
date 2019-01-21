@@ -1,6 +1,6 @@
 ---
 layout: post
-title:Creational patterns Regular expressions in C++
+title: Creational patterns Regular expressions in C++
 categories:
   - Programming
 tags:
