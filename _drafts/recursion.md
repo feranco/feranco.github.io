@@ -59,9 +59,21 @@ Regarding the time complexity, this is not always easy to define for recursive a
 * it is proportional to the number of reduction steps, in case there is only one recursive call.
 * it is proportional to the number of leafs in the recursion tree, in case there are more multiple recursive calls. According to the trees theory this number corresponds to the branching factor ^ max number of reduction steps.
 
-As a final note, it should be taken into account that every recursive problem always be solved iteratively and viceversa. Even if the two solutions are equivalent from a time complexity poit of view, the iterative solution is usually more space efficient because there isn't any need to store stack frames regardless tail recursion optimization is appliable or not..
+As a final note, it should be taken into account that every recursive problem always be solved iteratively and viceversa. Even if the two solutions are equivalent from a time complexity poit of view, the iterative solution is usually more space efficient because there isn't any need to store stack frames regardless tail recursion optimization is appliable or not. For example the GCD algorithm can be easily implemented iteratively as follows:
 
+{% highlight cpp %}
+//iterative
 
+int gcd (int p, int q) {
+
+     while (q != 0) {
+     	   int tmp = p;
+     	   p = q;
+	   q = tmp % q;
+     }
+     return p;
+}
+{% endhighlight %}
 
 
 
