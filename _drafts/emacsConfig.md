@@ -14,17 +14,20 @@ In case of complex configurations, the startup time required by Emacs grows cons
 way to get rid of this is to use a server-client approach, loading an Emacs
 server daemon during the operating system startup and then using an emacs client
 to connect to it. On Linux systems, the standard method of automatically running
-the Emacs daemon at startup is *systemmd*. First of all we need to create the
-directory where to store the Emacs daemon service file with the following
-command: *mkdir -p ~/.config/systemd/user*. Then we place in this directory the
-following service file:
+the Emacs daemon at startup is *systemmd*. The procedure is summarized in the
+following steps:
+* create the directory where to store the Emacs daemon service file with the
+ command: *mkdir -p ~/.config/systemd/user*
+* place in this directory the following service file:
 
+```bash
 [Unit]
 Description=Emacs: the extensible, self-documenting text editor
 Documentation=man:emacs(1) info:Emacs
 
 [Service]
 Type=forking
+# ExecStart and ExecStop specify the emacs server and the emacs client paths
 ExecStart=/usr/local/bin/emacs --daemon
 ExecStop=/usr/local/bin/emacsclient --eval "(progn (setq kill-emacs-hook nil) (kill-emacs))"
 Restart=on-failure
@@ -38,8 +41,41 @@ TimeoutStartSec=0
 
 [Install]
 WantedBy=default.target
+```
+* give to the service file the execution permission with the command *chmod -x ~/.config/systemd/user/emacsd.service*
 
+When the above procedure has been completed, it is possible to enable, disable,
+start, restart, stop or check the status of the Emacs daemon with the following commands:
 
+```bash
+systemctl --user enable emacsd.service
+systemctl --user disable emacsd.service
+systemctl --user start emacsd.service
+systemctl --user restart emacsd.service
+systemctl --user stop emacsd.service
+systemctl --user status emacsd.service
+```
 
-This mean to
-use systemd to automatically load
+Once the service has been enabled and started, it is possible to check that the
+Emacs server is running using the command *ps aux | grep emacs*. The last step
+is connecting an Emacs client to the server using the command *emacsclient -c*.
+The command *sudo netstat -xaupen | grep emacs* should show that the Emacs
+server and the Emacs client are connected:
+
+```bash
+unix  2      [ ACC ]     STREAM     LISTENING     24138    1795/emacs          /tmp/emacs1000/server
+unix  3      [ ]         STREAM     CONNECTED     32411    3349/emacsclient
+```
+## Ripgrep
+
+Ripgrep is a line-oriented search tool that recursively searches your current
+directory for a regex pattern, taking into account any rule defined in the
+.gitignore file. Ripgrep is built on top of Rust's regex engine and is
+considerably faster then any other popular search engine. If the ripgrep
+executable is installed, my Emacs configuration define it as the default grep
+command used to search in the counsel-etag database. To install ripgrep on
+debian-based operating systems,
+download the .deb binary file with th ìe command *curl -LO
+https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb*
+and then install it using dpkg: *sudo dpkg -i ripgrep_0.10.0_amd64.deb*.
+*
