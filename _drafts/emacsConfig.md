@@ -78,4 +78,24 @@ debian-based operating systems,
 download the .deb binary file with th ìe command *curl -LO
 https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb*
 and then install it using dpkg: *sudo dpkg -i ripgrep_0.10.0_amd64.deb*.
-*
+
+## Ycmd
+~/.emacs.d/plugins/bazel-mode.el
+cd ycmd/
+git clone https://github.com/Valloric/ycmd
+
+sudo apt-get install ycmd
+
+ git submodule update --init --recursive
+ sudo apt install build-essential cmake python3-dev
+python3 install.py --clang-completer
+
+##CTAGS Universal tags
+ ctags --version
+
+Run over a project (-R is to walk the project recursively, and -e is to use Emacs-compatible syntax):
+
+$ ctags -eR
+
+Alternatively if you like to only include files with certain extensions, you can use -a (append, creates a file if doesn't exist) option with find utility, like:
+$ find -name "*.cpp" -print -or -name "*.h" -print -or -name "*.hxx" -print -or -name "*.cxx" -print | xargs ctags -ea
