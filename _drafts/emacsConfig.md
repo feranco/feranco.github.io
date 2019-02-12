@@ -1,12 +1,20 @@
 ---
 layout: post
-title: Emacs Configuration
+title: Configure
+
+Emacs as an IDE
 categories:
   - Tools
 tags:
   - Emacs
 last_modified_at: 2019-01-25T09:55:59-05:00
 ---
+
+There are many posts explaining how to configure and use Emacs as an IDE. Among
+them, my favourite is the one proposed by [Nils
+Deppe](https://nilsdeppe.com/posts/emacs-c++-ide2). I used his work as base for
+my configuration, making small changes for adapting it to my needs. In this post
+I would like to share my configuration, explaining in details
 
 ## Emacs Server and Client
 
