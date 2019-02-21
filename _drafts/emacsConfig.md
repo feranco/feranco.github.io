@@ -14,7 +14,7 @@ There are many posts explaining how to configure and use Emacs as an IDE. Among
 them, my favourite is the one proposed by [Nils
 Deppe](https://nilsdeppe.com/posts/emacs-c++-ide2). I used his work as base for
 my configuration, making small changes for adapting it to my needs. In this post
-I would like to share my configuration, explaining in details
+I would like to share this configuration, explaining in details
 
 ## Emacs Server and Client
 
@@ -87,14 +87,29 @@ download the .deb binary file with th ìe command *curl -LO
 https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb*
 and then install it using dpkg: *sudo dpkg -i ripgrep_0.10.0_amd64.deb*.
 
-## Ycmd
+## You Complete Me Daemon (Ycmd)
+
+[Ycmd]( https://github.com/Valloric/ycmd ) is a server that provides APIs for
+code-completion. Combined with  [emacs-ycmd] (https://github.com/abingham/emacs-ycmd) client, Ycmd provides a
+code-completion framework which is fast and accurate. To install Ycmd, the
+following steps are required:
+* install the minimal dependencies with *sudo apt install build-essential cmake python3-dev*
+* install the ycmd command with *sudo apt-get install ycmd*
+* clone the ycmd repository with *git clone https://github.com/Valloric/ycmd*
+* enter the ycmd folder and update the submodules with *git submodule update
+  --init --recursive*
+* enable the language specifice code-completion engines with *python3 build.py
+--option*, where option is clang-completer for c/c++, java-completer for java
+and so on (run python3 build.py --help to check all the supported engines).
+
+
 ~/.emacs.d/plugins/bazel-mode.el
 cd ycmd/
-git clone https://github.com/Valloric/ycmd
 
-sudo apt-get install ycmd
 
- git submodule update --init --recursive
+
+
+
  sudo apt install build-essential cmake python3-dev
 python3 install.py --clang-completer
 
