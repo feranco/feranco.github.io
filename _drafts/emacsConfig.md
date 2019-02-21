@@ -90,7 +90,7 @@ and then install it using dpkg: *sudo dpkg -i ripgrep_0.10.0_amd64.deb*.
 ## You Complete Me Daemon (Ycmd)
 
 [Ycmd]( https://github.com/Valloric/ycmd ) is a server that provides APIs for
-code-completion. Combined with  [emacs-ycmd] (https://github.com/abingham/emacs-ycmd) client, Ycmd provides a
+code-completion. Combined with [emacs-ycmd] (https://github.com/abingham/emacs-ycmd) client, Ycmd provides a
 code-completion framework which is fast and accurate. To install Ycmd, the
 following steps are required:
 * install the minimal dependencies with *sudo apt install build-essential cmake python3-dev*
@@ -101,6 +101,37 @@ following steps are required:
 * enable the language specifice code-completion engines with *python3 build.py
 --option*, where option is clang-completer for c/c++, java-completer for java
 and so on (run python3 build.py --help to check all the supported engines).
+
+In order to use the emacs-ycmd in all supported mode the following statements
+have been added to the emacs configuration:
+
+```bash
+(setq ycmd-startup-timeout 10)
+(defvar my:ycmd-server-command '("/usr/bin/python3" "/home/feranco/Desktop/Git/ycmd/ycmd"))
+(defvar my:ycmd-extra-conf-whitelist '("~/.ycm_extra_conf.py"))
+(defvar my:ycmd-global-config "~/.ycm_extra_conf.py")
+```
+
+The first line set the timeout for the first request sent by the emacs-ycmd
+client to 10 seconds, so to be sure that the ycmd server has already
+started. This setting could not be strictly necessary on all machines, but
+anyway it won't hurt. The second line specifies the command used to run the
+server. The command has two arguments: the python3 executable and the path to
+the ycmd directory (a subfolder of the one cloned from the Git repository). It
+is really important to take into account that no filename expansion is done for
+the arguments, so for example the following arguments won't work:
+"~/Desktop/Git/ycmd/ycmd". The remaining two lines allow to use a global ycmd
+configuration
+
+[Gist](https://gist.github.com/nilsdeppe/449f1bd4920b7f50b6f05d8f7fda4f6f)that very aggressively finds compilation flags for header filesThe script must be placed at ~/.ycm_extra_conf.py for the Emacs configuration to find and use it.
+
+If you've got project-specific ycmd configurations (almost certainly called
+.ycm_extra_conf.py), and if you want them automatically loaded by ycmd as needed
+(which you probably do), then you can whitelist them by adding entries to
+ycmd-extra-conf-whitelist. For example, this will allow automatic loading of all
+.ycm_extra_conf.py files anywhere under ~/my_projects
+
+Another thing to be aware of is that getting YCMD, or more specifically libclang, to play nicely with precompiled headers took some work. See this issue on the YCMD GitHub for details. The short story is that if you use precompiled headers you might have to build YCMD using your system libclang by passing --system-libclang to the build script.
 
 
 ~/.emacs.d/plugins/bazel-mode.el
@@ -116,9 +147,18 @@ python3 install.py --clang-completer
 ##CTAGS Universal tags
  ctags --version
 
+ git clone https://github.com/universal-ctags/ctags and follow the instructions
+ in autotools.rst
+   $ ./autogen.sh
+    $ ./configure --prefix=/where/you/want # defaults to /usr/local
+    $ make
+    $ make install # may require extra privileges depending on where to install
+
+
 Run over a project (-R is to walk the project recursively, and -e is to use Emacs-compatible syntax):
 
 $ ctags -eR
 
 Alternatively if you like to only include files with certain extensions, you can use -a (append, creates a file if doesn't exist) option with find utility, like:
-$ find -name "*.cpp" -print -or -name "*.h" -print -or -name "*.hxx" -print -or -name "*.cxx" -print | xargs ctags -ea
+$ find -name "*.cpp" -print -or -name "*.h" -print -or -name "*.hxx" -print -or
+-name "*.cxx" -print | xargs ctags -ea
