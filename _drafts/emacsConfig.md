@@ -121,17 +121,13 @@ the ycmd directory (a subfolder of the one cloned from the Git repository). It
 is really important to take into account that no filename expansion is done for
 the arguments, so for example the following arguments won't work:
 "~/Desktop/Git/ycmd/ycmd". The remaining two lines allow to use a global ycmd
-configuration
-
-[Gist](https://gist.github.com/nilsdeppe/449f1bd4920b7f50b6f05d8f7fda4f6f)that very aggressively finds compilation flags for header filesThe script must be placed at ~/.ycm_extra_conf.py for the Emacs configuration to find and use it.
-
-If you've got project-specific ycmd configurations (almost certainly called
-.ycm_extra_conf.py), and if you want them automatically loaded by ycmd as needed
-(which you probably do), then you can whitelist them by adding entries to
-ycmd-extra-conf-whitelist. For example, this will allow automatic loading of all
-.ycm_extra_conf.py files anywhere under ~/my_projects
-
-Another thing to be aware of is that getting YCMD, or more specifically libclang, to play nicely with precompiled headers took some work. See this issue on the YCMD GitHub for details. The short story is that if you use precompiled headers you might have to build YCMD using your system libclang by passing --system-libclang to the build script.
+configuration. If ycmd is used as c/c++ code-completion engine, it is useful to
+have a global configuration that is able to find compilation flags for header files. The one
+proposed in this [Gist](https://gist.github.com/nilsdeppe/449f1bd4920b7f50b6f05d8f7fda4f6f) works
+very well. The configuration shall be placed at ~/.ycm_extra_conf.py, so that
+the Emacs configuration can find and use it. The ycmd-extra-conf-whitelist
+command allow to whitelist the global configuration so that project-specific
+ycmd configurations can automatically loaded by ycmd if they are Another.
 
 
 ~/.emacs.d/plugins/bazel-mode.el
@@ -144,21 +140,36 @@ cd ycmd/
  sudo apt install build-essential cmake python3-dev
 python3 install.py --clang-completer
 
-##CTAGS Universal tags
- ctags --version
+##Universal C-TAGS
 
- git clone https://github.com/universal-ctags/ctags and follow the instructions
- in autotools.rst
-   $ ./autogen.sh
-    $ ./configure --prefix=/where/you/want # defaults to /usr/local
-    $ make
-    $ make install # may require extra privileges depending on where to install
+[Universal C-Tags](https://github.com/universal-ctags/ctags) is a framework
+allowing to quickly navigate the code base by jumping to the definition of a
+class or function. In order to install universal x-tags on linux systems, the
+following steps are required:
+* clone the repository with this command https://github.com/universal-ctags/ctags
+* follow the instructions contained in the
+ ```bash
+./autogen.sh
+./configure
+make
+make install
+```
+* verify that the following output is generated when running the command ctags --version
+ ```bash
+Universal Ctags 0.0.0(49f3a3d), Copyright (C) 2015 Universal Ctags Team
+Universal Ctags is derived from Exuberant Ctags.
+Exuberant Ctags 5.8, Copyright (C) 1996-2009 Darren Hiebert
+  Compiled: Feb  7 2019, 23:09:41
+  URL: https://ctags.io/
 
+```
 
-Run over a project (-R is to walk the project recursively, and -e is to use Emacs-compatible syntax):
+Once the universal c-tags framework has been installed, a CTAGS file for the
+code base shall be generated executing one of the following commands in the
+root folder of the project:
+* ctags -eR where -R is to walk the project recursively, and -e is to use
+  Emacs-compatible syntax
+* find -name "*.cpp" -print -or -name "*.h" -print | xargs ctags -ea where -a
+  append or create a file if doesn't exist.
 
-$ ctags -eR
-
-Alternatively if you like to only include files with certain extensions, you can use -a (append, creates a file if doesn't exist) option with find utility, like:
-$ find -name "*.cpp" -print -or -name "*.h" -print -or -name "*.hxx" -print -or
--name "*.cxx" -print | xargs ctags -ea
+The second command allows to include only the files with the specified extension.
