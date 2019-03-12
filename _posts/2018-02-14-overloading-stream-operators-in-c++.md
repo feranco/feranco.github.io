@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Overloading Stream Operators in C++"
+title: "Overloading Stream Operators"
 categories:
   - C++
 tags:
