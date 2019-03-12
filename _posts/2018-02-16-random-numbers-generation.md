@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Random Number Generation in C++
+title: Random Number Generation
 categories:
   - C++
 tags:
