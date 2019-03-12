@@ -10,7 +10,7 @@ last_modified_at: 2018-06-20T11:19:59-05:00
 
 Convert a string to an number is a quite common task in C++. This post summarizes the most common techniques to accomplish this task.
 
-##String to number conversion
+## String to integer conversion
 
 The first method is to construct an input stringstream initialized with the string to be converted and then reading the value into a variable using the >> operator. 
 
@@ -51,7 +51,7 @@ bool string2Int(const std::string& s, int& number)
 
 Using "%f" in place of "%d" allows to convert a string to a floating-point value.
 
-##Number to string conversion
+## Integer to string conversion
 
 The first method is to write the number to be converted into an output stringstream using the << operator and then getting the string using the str() member function. 
 
