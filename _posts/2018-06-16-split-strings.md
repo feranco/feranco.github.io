@@ -2,10 +2,10 @@
 layout: post
 title: How to split a string
 categories:
-  - Programming
+  - C++
 tags:
   - C++
-  - Python
+  - String
 last_modified_at: 2018-06-16T09:55:59-05:00
 ---
 
