@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rotate array"
+title: "Rotate arrays"
 categories:
   - Algorithms
 tags:
