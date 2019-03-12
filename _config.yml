@@ -7,7 +7,7 @@ title:            Fernando Franco SWE
 tagline:          'Fernando Franco personal website'
 description:      'Personal website of <a href="about.html" target="_blank">Fernando Franco</a>, Software Engineer.'
 url:              https://fernandofrancoswe.com
-baseurl:          # the optional subpath of your site, e.g. "/blog"
+#baseurl:          # the optional subpath of your site, e.g. "/blog"
                   # NB: This applies to all pages in your Jekyll site.
                   # If you want to move just the blog index pages but keep
                   # other pages at root, see the paginate_path and
