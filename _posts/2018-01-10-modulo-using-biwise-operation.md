@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Modulo using bitwise operation
+comments: true
 categories:
   - Programming
 tags:
