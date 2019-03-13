@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: About me
 sidebar_link: true
 ---
 
@@ -15,5 +15,3 @@ I'm a PhD SW Engineer with a solid professional background in the overall SW lif
 </p>
 
 You can download my cv <a href="{{ site.url }}/assets/documents/cv.pdf" class="noborder">here</a>.
-
-
