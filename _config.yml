@@ -5,7 +5,7 @@ highlighter:      rouge
 # Setup
 title:            Fernando Franco SWE
 tagline:          'Fernando Franco personal website'
-description:      'Personal website of Fernando Franco, Sw Engineer'
+description:      'Personal website of Fernando Franco, Software Engineer'
 url:              https://fernandofrancoswe.com
 #baseurl:          # the optional subpath of your site, e.g. "/blog"
                   # NB: This applies to all pages in your Jekyll site.
