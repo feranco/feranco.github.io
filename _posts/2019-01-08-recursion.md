@@ -5,7 +5,7 @@ categories:
   - Algorithms
 tags:
   - Recursion
-last_modified_at: 2019-01-25T09:55:59-05:00
+last_modified_at: 2019-01-08T19:55:59-05:00
 ---
 
 Recursion is the process of defining a problem in terms of itself and it is a powerful tool in defining algorithms. Indeed, a recursive solution to a problem can be written as a function calling itself. Every recursive function requires two main components:
@@ -20,7 +20,7 @@ There are three different ways a recursive function can return an output value:
 * storing the result in a passed variable
 * building up the result as it return from the base case.
 
-These three options are showed in the following code implementing a recursion function computing the GCD of two positive integers. It's useful to remember that the GCD of two positive integers p and q can be efficiently computed using the following property: if p > q, the GCD of p and q is the same as the GCD of q and p % q. So recursively computing p % q, when p % q is equal to 0 the GCD corresponds to q. 
+These three options are showed in the following code implementing a recursion function computing the GCD of two positive integers. It's useful to remember that the GCD of two positive integers p and q can be efficiently computed using the following property: if p > q, the GCD of p and q is the same as the GCD of q and p % q. So recursively computing p % q, when p % q is equal to 0 the GCD corresponds to q.
 
 {% highlight cpp %}
 //global result variable
@@ -74,6 +74,3 @@ int gcd (int p, int q) {
      return p;
 }
 {% endhighlight %}
-
-
-
