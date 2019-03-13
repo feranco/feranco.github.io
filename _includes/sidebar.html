@@ -8,15 +8,12 @@
   
   <header>
     <{% if page.layout == "index" %}h1{% else %}div{% endif %} class="site-title">
-      { site.title }
-      {% comment %}
       <a href="{{ site.baseurl }}/">
         {% unless page.url == "/" %}
           <span class="back-arrow icon">{% include svg/back-arrow.svg %}</span>
         {% endunless %}
         {{ site.title }}
       </a>
-      {% endcomment %} 
     </{% if page.layout == "index" %}h1{% else %}div{% endif %}>
     <p class="lead">{{ site.description }}</p>
   </header>
