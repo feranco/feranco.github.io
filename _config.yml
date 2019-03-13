@@ -3,7 +3,7 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            Fernando Franco SWE
+title:            Fernando Franco Sw Engineer
 tagline:          'Fernando Franco personal website'
 description:      'Personal website of <a href="about.html" target="_blank">Fernando Franco</a>, Software Engineer.'
 url:              https://fernandofrancoswe.com
