@@ -21,8 +21,45 @@ most recent data are always consumed.
 
 This post presents a Ring Buffer implemented with C++ template. The data structure provides API to put
 elements into the buffer and get elements from the buffer, to know if the buffer
-is full or empty and to know the size and capacity of the buffer. The
-implementation has the following features:
+is full or empty and to know the size and capacity of the buffer.
+
+```cpp
+template <class T>
+class RingBuffer {
+
+  using DataPtr = std::unique_ptr<T[], std::function<void(T*)>>;
+
+ public:
+
+  RingBuffer(size_t size);
+  ~RingBuffer();
+
+  RingBuffer(const RingBuffer& src);
+  RingBuffer& operator= (const RingBuffer& rhs);
+
+  RingBuffer(RingBuffer&& rhs);
+  RingBuffer& operator =(RingBuffer&& rhs);
+
+  bool empty() const;
+  bool full() const;
+
+  void put(const T& item);
+  T get();
+
+  size_t capacity() const;
+  size_t size() const;
+
+ private:
+  std::mutex mMutex;
+  size_t mHead = 0;
+  size_t mTail = 0;
+  size_t mCapacity;
+  std::function<void(T*)> deleter = [](T *m){ operator delete(m);};
+  DataPtr mData;
+};
+```
+
+The implementation has the following features:
 
 * the data structure is move copyable and assignable;
 * only used elements are instantiated, using the placement new operator;
@@ -32,25 +69,25 @@ implementation has the following features:
 
 # Construction and Destruction
 
-The constructor allocates the raw memory for the Ring Buffer and sets the buffer
-capacity. The array version std::unique_ptr<T[]> of the smart pointer is used in
-order to make it possible the use of the [] operator to access the elements
-stored in the buffer. The placement new operator allocates the memory necessary
+The constructor allocates the raw memory for the Ring Buffer using the operator
+new and sets the buffer capacity.  The new operator allocates the memory necessary
 to store a number of elements equal to the buffer capacity. Actually, the
 allocated memory is one slot more than the requested capacity in order to detect
 the full/empty states of the buffer with the head/tail pointers, without any
 additional logic and member variables.
 
 ```cpp
-RingBuffer(size_t size) :
+ RingBuffer(size_t size) :
       mCapacity(size+1),
-      mData(std::unique_ptr<T[]>(static_cast<T*>(operator new (((size+1)*sizeof(T))))))
+      mData(static_cast<T*>(operator new ((size+1)*sizeof(T))), deleter)
 {
 
 }
 ```
-Not sure about the distructor. Try implement a int wrapper with a distructor
-that print and see what happen with and without the code below.
+Since the element are instantiated using placement new, every element remaining in
+the buffer is manually destroyed calling its destructor. This is quite
+interesting, because the use of placement new it-s probably one of the few cases
+where it makes sense to calling the destructor explicitly.
 
 ```cpp
 ~RingBuffer()
@@ -65,6 +102,13 @@ that print and see what happen with and without the code below.
     }
   }
 ```
+
+The raw memory for the ring buffer is implicitly deallocated by the
+std::unique_ptr smart pointer that invokes the deleter function specified as
+argument. The use of a custom deleter function it`s necessary because the smart
+pointer holds an array of elements of type T, while the constructor allocated
+raw memory. Without the custom deleter, the smart pointer would have tried to
+call delete[] on such arrays causing an undefined behavior.
 
 # Full and Empty states
 
@@ -86,4 +130,40 @@ bool full() const
     //If tail is ahead the head by 1 the container is full
     return (mHead == ((mTail+1)%mCapacity));
 }
+```
+
+# Insert and Remove elements
+
+Adding and removing elements from the ring buffer requires to modify the head and
+tail pointers. A new element is inserted at the current tail location, advancing
+then the tail by one (modulo the buffer capacity). If the buffer is full, it is
+also necessary to advance the head property in order to preserve the conditions
+used to verify the empty and full states. When removing an element, the element
+at the current head location is returned, advancing then the head by one (modulo the buffer capacity).
+If the buffer is empty, an empty value is returned.
+
+```cpp
+ void put(const T& item)
+  {
+    std::lock_guard<std::mutex> lock(mMutex);
+    if (full()) mHead = (mHead+1) % mCapacity;
+    new(mData.get() + mTail) T(item);
+    mTail = (mTail+1) % mCapacity;
+  }
+
+  T get()
+  {
+    std::lock_guard<std::mutex> lock(mMutex);
+
+    if(empty())
+    {
+      return T();
+    }
+
+    //Read mData and advance the head
+    auto ret = mData[mHead];
+    mData[mHead].~T();
+    mHead = (mHead+1) % mCapacity;
+    return ret;
+  }
 ```
