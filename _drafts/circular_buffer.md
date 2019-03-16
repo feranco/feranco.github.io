@@ -5,7 +5,8 @@ categories:
   - Data Structures
 tags:
   - C++
-last_modified_at: 2018-05-25T09:55:59-05:00
+  - Data Structures
+last_modified_at: 2019-03-12T08:55:59-05:00
 ---
 
 Ring buffers (also known as circular buffers) are fixed-size buffers that work
@@ -91,16 +92,16 @@ where it makes sense to calling the destructor explicitly.
 
 ```cpp
 ~RingBuffer()
-  {
+{
     if (mData != nullptr)
     {
-      // Destroy all elements in buffer
-      for (std::size_t i = mHead; i != mTail; i = (i + 1) % mCapacity)
-      {
-        mData[i].~T();
-      }
+        // Destroy all elements in buffer
+        for (std::size_t i = mHead; i != mTail; i = (i + 1) % mCapacity)
+        {
+            mData[i].~T();
+        }
     }
-  }
+}
 ```
 
 The raw memory for the ring buffer is implicitly deallocated by the
@@ -108,7 +109,7 @@ std::unique_ptr smart pointer that invokes the deleter function specified as
 argument. The use of a custom deleter function it`s necessary because the smart
 pointer holds an array of elements of type T, while the constructor allocated
 raw memory. Without the custom deleter, the smart pointer would have tried to
-call delete[] on such arrays causing an undefined behavior.
+call delete[ ] on such arrays causing an undefined behavior.
 
 # Full and Empty states
 
@@ -132,6 +133,24 @@ bool full() const
 }
 ```
 
+# Size and Capacity
+
+The size of the Ring Buffer corresponds to the number of stored elements, while
+its capacity corresponds to the maximum number of elements that can be stored.
+
+```cpp
+  size_t capacity() const
+  {
+    return mCapacity;
+  }
+
+  size_t size() const
+  {
+    return (mTail >= mHead) ? (mTail - mHead) : (mCapacity - mHead + mTail);
+
+  }
+```
+
 # Insert and Remove elements
 
 Adding and removing elements from the ring buffer requires to modify the head and
@@ -143,21 +162,21 @@ at the current head location is returned, advancing then the head by one (modulo
 If the buffer is empty, an empty value is returned.
 
 ```cpp
- void put(const T& item)
-  {
+void put(const T& item)
+{
     std::lock_guard<std::mutex> lock(mMutex);
     if (full()) mHead = (mHead+1) % mCapacity;
     new(mData.get() + mTail) T(item);
     mTail = (mTail+1) % mCapacity;
-  }
+}
 
-  T get()
-  {
+T get()
+{
     std::lock_guard<std::mutex> lock(mMutex);
 
     if(empty())
     {
-      return T();
+        return T();
     }
 
     //Read mData and advance the head
@@ -165,5 +184,11 @@ If the buffer is empty, an empty value is returned.
     mData[mHead].~T();
     mHead = (mHead+1) % mCapacity;
     return ret;
-  }
+}
 ```
+
+# Conclusion
+
+The complete Ring Buffer implementation can be found in my [Github
+repository](https://github.com/feranco/data-structures/tree/master/circular_buffer)
+and is tested using the Google C++ test framework.
