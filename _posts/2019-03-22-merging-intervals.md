@@ -54,13 +54,6 @@ class Meeting
   {
     mEndTime = endTime;
   }
-
-  bool operator==(const Meeting& other) const
-  {
-    return
-        mStartTime == other.mStartTime
-        && mEndTime == other.mEndTime;
-  }
 };
 ```
 
