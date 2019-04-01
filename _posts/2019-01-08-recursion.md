@@ -74,3 +74,7 @@ int gcd (int p, int q) {
      return p;
 }
 {% endhighlight %}
+
+Recursion can be applied to pretty much any problem, but there are certain scenarios for which it is particularly helpful. The following posts explore those scenarios:
+
+*
