@@ -46,7 +46,7 @@ void gcd (int p, int q, int* result) {
 {% highlight cpp %}
 //return result
 
-void gcd (int p, int q, int* result) {
+int gcd (int p, int q) {
 
      if (q == 0) return p;
      return gcd(q, p%q);
