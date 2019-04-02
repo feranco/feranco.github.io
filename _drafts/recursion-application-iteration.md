@@ -8,7 +8,7 @@ tags:
 last_modified_at: 2019-01-25T09:55:59-05:00
 ---
 
-A straightforward application of recursion is to replace iteration using a recursive function instead of a for loops. Such recursive functions allow to iterate over data structures, taking as parameter the index that would be used in a for loop. As an example, let's consider the following code printing a c++ vector:
+The most straightforward application of recursion is to replace iteration using a recursive function instead of for/while loops. Such recursive functions allow to iterate over data structures, taking as parameter the index that would be used in a for loop. As an example, let's consider the following code printing a c++ vector:
 
 {% highlight cpp %}
 //forward iteration
@@ -20,7 +20,7 @@ void iterate (const std::vector& a, size_t idx) {
 }
 {% endhighlight %}
 
-It is worth to notice that the position of the recursive call detemines the direction of the iteration. Indeed, the vector can be printed in reverse order by simply writing the recursive call before printing each element.
+It is worth to notice that the position of the recursive call determines the direction of the iteration. Indeed, the vector can be printed in reverse order by simply writing the recursive call before printing each element.
 
 {% highlight cpp %}
 //reverse iteration
