@@ -32,4 +32,41 @@ void iterateBackward (const std::vector& a, size_t idx) {
 }
 {% endhighlight %}
 
-The use of recursion to iterate over a data structure is rarely useful. An exception are some special cases where the use of recursion replace the use of an explicit stack providing a more elegant solution. Let's consider a couple of examples. In the first one, the goal is to write a function traversing a single linked list in reverse order. The iterative solution would traverse the list starting from the head, pushing each node in a stack. Once all nodes has been pushed, they can be visited in reverse order by simply popping them.
+The use of recursion to iterate over a data structure is rarely useful. An exception are some special cases where the use of recursion replace the use of an explicit stack providing a more elegant solution. Let's consider a couple of examples. In the first one, the goal is to write a function traversing a single linked list in reverse order. The iterative solution traverses the list starting from the head, pushing each node in a stack. Once all nodes has been pushed, they can be visited in reverse order by simply popping them. Instead, the recursive solution traverses the list making recursive calls until the end of the list is reached (the base case). At this point, the control goes back to the previous calls that print the list in reverse order.
+
+```cpp
+template <typename T>
+struct Node {
+  Node(T data, Node<T>* next) : data(data), next(next){}
+  T data;
+  std::shared_ptr<Node<T>> next;
+};
+
+template <typename T>
+void printListReversedIterative (std::shared_ptr<Node<T>> head) {
+
+  std:: stack<T> data;
+
+  while (head != nullptr) {
+    data.push(head->data);
+    head = head->next;
+  }
+
+  while (!data.empty()) {
+    std::cout << data.top() << "\n";
+    data.pop();
+  }
+}
+
+template <typename T>
+void printListReversedRecursive (const std::shared_ptr<Node<T>>& head) {
+
+  if (head == nullptr) return;
+  printListReversedRecursive(head->next);
+  std::cout << head->data << "\n";
+}
+```
+
+In the second example, the goal is to write a function inserting an element at the bottom of a stack. The iterative solution pops all the elements from the input stack, pushing them in an auxiliary stack. Once the input stack is empty, the new element is pushed into it. Finally all the elements in the auxiliary array are popped and pushed back into the input array. In recursive solution the auxiliary stack is replaced by the function stack frame. Once an element is popped from the input stack, the function makes a recursive call until the input stack is not empty (base case). When the stack is empty, the new element is inserted. At this point, every recursive call completes its execution pushing back into the stack the element previously popped.
+
+traverses the list making recursive calls until the end of the list is reached (the base case). At this point, the control goes back to the previous calls that print the list in reverse order.
