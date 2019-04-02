@@ -68,5 +68,3 @@ void printListReversedRecursive (const std::shared_ptr<Node<T>>& head) {
 ```
 
 In the second example, the goal is to write a function inserting an element at the bottom of a stack. The iterative solution pops all the elements from the input stack, pushing them in an auxiliary stack. Once the input stack is empty, the new element is pushed into it. Finally all the elements in the auxiliary array are popped and pushed back into the input array. In recursive solution the auxiliary stack is replaced by the function stack frame. Once an element is popped from the input stack, the function makes a recursive call until the input stack is not empty (base case). When the stack is empty, the new element is inserted. At this point, every recursive call completes its execution pushing back into the stack the element previously popped.
-
-traverses the list making recursive calls until the end of the list is reached (the base case). At this point, the control goes back to the previous calls that print the list in reverse order.
