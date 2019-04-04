@@ -34,7 +34,7 @@ unsigned int countingCombinations (unsigned int n) {
 
   return combinationWithN + combinationWithoutN;
 }
-
+```
 
 The same idea applies iterate through all the element of the set trying to
 include\exclude it and collect every different variation.
