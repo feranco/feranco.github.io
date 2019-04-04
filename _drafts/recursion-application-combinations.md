@@ -21,7 +21,7 @@ equal to given sum.
 # Counting combinations
 
 Since each element can be included or excluded from a subset, the number of possible combinations of a given set of
-n elements is 2<sup>n</sup>. The algorithm to count all possible combination of a given set is straightforward and has a O(2(<sup>n</sup>)) time complexity. Instead, the space complexity is O(n) because the height of the recursion tree corresponds to the size of the set.
+n elements is 2<sup>n</sup>. The algorithm to count all possible combination of a given set is straightforward and has a O(2<sup>n</sup>) time complexity. Instead, the space complexity is O(n) because the height of the recursion tree corresponds to the size of the set.
 
 ```cpp
 unsigned int countingCombinations (unsigned int n) {
