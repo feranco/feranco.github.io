@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Recursion Application: iteration
+title: Recursion Application iteration
 categories:
   - Algorithms
 tags:
