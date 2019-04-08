@@ -49,7 +49,7 @@ The same idea used to count all possible combinations of a given set can be appl
 
 So, including/excluding the first element of the set lead to two different combinations (first branch), including/excluding the second element lead to other two different combinations for each of the two combination previously obtained (second branch), and so on. Branching by two each time, this process allows to generate all the possible 2<sup>n</sup> combinations. 
 
-The following functions implements this algorithm building up the result as it return from the base case. 
+The following function implements this algorithm building up the result as it return from the base case. 
 
 ```cpp
 template <typename T>
@@ -96,6 +96,13 @@ void powerSet (const vector<T>& set, vector<T>& currentSet, vector<vector<T>>& p
   /also not needed if I create a copy of current set and continue passing by references
 }
 ```
+
+Even if the function is not difficult to understand, it is worth to observe the following details:
+* each subset is returned as a list in order to have O(1) insertions and return the elements in the same order they were in the given input set;
+* the base case shall return an empty list (and not only an empty power set);
+* 
+
+The time complexity of the solution is O(n2<sup>n</sup>) because it generates 2<sup>n</sup> lists and each list shall be copied in O(n) time. The space complexity is also O(n2<sup>n</sup>) because 2<sup>n</sup> lists shall be stored and each list requires O(n) space.
 
 return value is important to optimize with dynamic programming, because passed variable introduce like a global state that prevents to 
 catch the values that are used to cache results in dynamic programming.
