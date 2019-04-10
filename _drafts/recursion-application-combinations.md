@@ -16,9 +16,8 @@ elements in a given set and processing these combinations in order to keep
 only the ones fulfilling certain criteria. For example the knapsack problem
 keeps the most profitable combination of items given a bound on their total
 weight, while the perfect sum problem keeps all subsets of given array with sum
-equal to given sum. Before analyzing such category of problems, it's worth to observe that
-they can be often optimized using the following techniques:
-* backtracking: the process of generating a combination is stopped as soon as the criteria is not fulfilled, starting immediately the generation of the next combination;
+equal to given sum. Such category of problems can be often optimized using the following techniques:
+* backtracking: the process of generating a combination is stopped as soon as the criteria defining a valid solution are not fulfilled, the most recently added element is removed from the combination (backtrack) and the generation of another combination is started from the step before;
 * dynamic programming: the partial values obtained generating a combination are cached so not to repeat them.
 
 # Counting combinations
