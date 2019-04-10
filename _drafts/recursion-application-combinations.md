@@ -40,7 +40,7 @@ unsigned int countingCombinations (unsigned int n) {
 
 # Generate combinations
 
-The same idea used to count all possible combinations of a given set can be applied to generate all the possible combinations of the set. Regardless of the data structure used to represent the set (e.g. array, list, etc...), the algorithm can be sketched as follow:
+The same idea used to count all possible combinations of a given set can be applied to generate all the possible combinations of the set (i.e. its power set). Regardless of the data structure used to represent the set (e.g. array, list, etc...), the algorithm can be sketched as follow:
 
 * go through all the elements of the set;
 * for each element try both to select it, including it in the current combination, and not select it, excluding it from the current combination;
@@ -124,6 +124,9 @@ It's interesting to notice the differences with the implementation building up t
 
 The branching factor is two and the depth of the recursion is n, so the time complexity is O(n2<sup>n</sup>). Since each element is first added and then removed from the current set in costant time, no extra work is executed during each call. The space complexity is also O(n2<sup>n</sup>) because of the space necessary to store all the lists. Anyway, if the function were just printing all the combinations, the space complexity would be only O(n) because of the space necessary to store the current set. 
 
+# Select combinations of a given size
+
+This problem is a slightly different version of the previous one and it requires to generate only the possible combinations with a given size n. The brute force algorithm is obviously to generate all the possible combinations with one of the functions described in the previous section and then filter them out to keep only the combination of size n. A better approach is to use backtracking in order to directly generate only the combinations of size n. The idea is to stop the generating a combination as soon as its size is n and then recursively remove the most recent elements in that combination in order to generate other combinations. (in the same way discard the combinations reaching the base case with less tahn n elements). 
 
 return value is important to optimize with dynamic programming, because passed variable introduce like a global state that prevents to 
 catch the values that are used to cache results in dynamic programming.
