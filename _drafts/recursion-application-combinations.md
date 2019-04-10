@@ -17,7 +17,7 @@ only the ones fulfilling certain criteria. For example the knapsack problem
 keeps the most profitable combination of items given a bound on their total
 weight, while the perfect sum problem keeps all subsets of given array with sum
 equal to given sum. Such category of problems can be often optimized using the following techniques:
-* backtracking: the process of generating a combination is stopped as soon as the criteria defining a valid solution are not fulfilled, the most recently added element is removed from the combination (backtrack) and the generation of another combination is started from the step before;
+* backtracking: the process of generating a combination is stopped as soon as the criteria defining a valid solution are not fulfilled. The most recent element is removed from the combination (backtrack) and the generation of another combination without this element is started;
 * dynamic programming: the partial values obtained generating a combination are cached so not to repeat them.
 
 # Counting combinations
@@ -85,7 +85,7 @@ Even if the function is not difficult to understand, it is worth to observe the 
 * the base case shall return an empty list (and not only an empty power set);
 * the branching factor is one and the depth of the recursion is n, so the time complexity depends on the amount of work done during each recursive call.
 
-In particular, the time complexity of the solution is O(n2<sup>n</sup>) because it generates 2<sup>n</sup> lists and each list shall be copied in O(n) time. The space complexity is also O(n2<sup>n</sup>) because 2<sup>n</sup> lists shall be stored and each list requires O(n) space. Anyway, since 
+In particular, the time complexity of the solution is O(n2<sup>n</sup>) because it generates 2<sup>n</sup> lists and each list shall be copied in O(n) time. The space complexity is also O(n2<sup>n</sup>) because 2<sup>n</sup> lists shall be stored and each list requires O(n) space.
 
 The following function implements the same algorithm using a passed variable to store the result. 
 
@@ -120,10 +120,10 @@ PowerSet<T> powerSetParams (const std::vector<T>& items) {
 It's interesting to notice the differences with the implementation building up the result:
 * the base case copy the current set in the passed variable storing the result;
 * since the current set is built forward traversing the given input set, all the element are naturally in the same order they were in the input set;
-* since the current set is passed by reference, it is necessary to remove set\[idx\] once the recursive call with the current set including
-set\[idx\] has been executed. A less efficient alternative to this basic backtracking mechanism would have been to pass the current set by copy.
+* since the current set is passed by reference, it is necessary to implement a basic backtracking mechanism adding the currently indexed item to the current set, executing the recursive call with the current set and finally removing the currently indexed item from the current set. A less efficient alternative would have been to create two copies of the current set (one with the currently indexed element and one without) or to pass the current set by copy.
 
-This is the basic backtracking mechanism, but in this case it doesn't bring a significant optimization because the function want to generate all the combinations. A less efficient alternative would have been to pass the current set by copy.
+The branching factor is two and the depth of the recursion is n, so the time complexity is O(n2<sup>n</sup>). Since each element is first added and then removed from the current set in costant time, no extra work is executed during each call. The space complexity is also O(n2<sup>n</sup>) because of the space necessary to store all the lists. Anyway, if the function were just printing all the combinations, the space complexity would be only O(n) because of the space necessary to store the current set. 
+
 
 return value is important to optimize with dynamic programming, because passed variable introduce like a global state that prevents to 
 catch the values that are used to cache results in dynamic programming.
