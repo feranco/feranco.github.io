@@ -126,7 +126,75 @@ The branching factor is two and the depth of the recursion is n, so the time com
 
 # Select combinations of a given size
 
-This problem is a slightly different version of the previous one and it requires to generate only the possible combinations with a given size n. The brute force algorithm is obviously to generate all the possible combinations with one of the functions described in the previous section and then filter them out to keep only the combination of size n. A better approach is to use backtracking in order to directly generate only the combinations of size n. The idea is to stop the generating a combination as soon as its size is n and then recursively remove the most recent elements in that combination in order to generate other combinations. (in the same way discard the combinations reaching the base case with less tahn n elements). 
+This problem is a slightly different version of the previous one and it requires to generate only the possible combinations with a given size n. It's interesting to analyze this problem because of the backtracking mechanism can be used to ptimize a solution. The brute force algorithm is obviously to generate all the possible combinations with one of the functions described in the previous section and then filter them out to keep only the combination of size n. A better approach is to use backtracking in order to directly generate only the combinations of size n. The idea is to keep track of the size of the current set during the recursive calls generating the combinations and use this information to stop the generation of the current set when its size exceeds the target one. The same information can be used to discard the current set when its size is less than the target one and the bottom of the recursion tree has been reached. The following function implements this algorithm building up the result as it return from the base case. The main difference with respect to the function solving the original problem is that an empty power set is returned in the two base cases representing when the current length exceeds the target one or if it's less than the target one and all the elements has been already visited.
+
+
+```cpp
+template <typename T>
+PowerSet<T> generatePowerSet (const std::vector<T>& items, unsigned int idx, unsigned int length, unsigned int currentLength) {
+
+  PowerSet<T> result;
+
+  //return the empty power set: no power set can be generated if
+  //the current length exceeds the target one or if it's less than the
+  //target one when all the elements has been already included/excluded
+  if (currentLength > length) return result;
+  if (idx == items.size() && currentLength < length) return result;
+
+  if (idx == items.size()) {
+    result.emplace_back(Set<T>());
+    return result;
+  }
+
+  auto withoutCurrentItem = generatePowerSet(items, idx+1, length, currentLength);
+  auto withCurrentItem = generatePowerSet(items, idx+1, length, currentLength+1);
+
+  result = withoutCurrentItem;
+
+  for (auto& set : withCurrentItem) {
+    set.emplace_front(items[idx]);
+    result.emplace_back(set);
+  }
+
+  return result;
+}
+
+template <typename T>
+PowerSet<T> powerSetReturn (const std::vector<T>& items, unsigned int length) {
+  return generatePowerSet(items, 0, length, 0);
+}
+
+```
+
+```cpp
+template <typename T>
+using Set = std::list<T>;
+template <typename T>
+using PowerSet = std::vector<Set<T>>;
+
+template <typename T>
+void powerSet (const vector<T>& set, vector<T>& currentSet, vector<vector<T>>& powerSet, size_t idx, size_t targetLength) {
+  
+  if (currentSet.size() == targetLength) {
+    powerSet.push_back(currentSet);
+    return;
+  }
+  
+  if (idx == set.size()) return;
+  
+  powerSet(set, currentSet, powerSet, idx+1); //current set without set[idx]
+  currentSet.push_back(set[idx]);
+  powerSet(set, currentSet, powerSet, idx+1); //current set with set[idx]  
+  currentSet.pop_back();
+}
+
+template <typename T>
+PowerSet<T> powerSetParams (const std::vector<T>& items, size_t length) {
+  PowerSet<T> result;
+  generatePowerSet(items, 0, result, Set<T>(), length);
+  return result;
+}
+```
 
 return value is important to optimize with dynamic programming, because passed variable introduce like a global state that prevents to 
 catch the values that are used to cache results in dynamic programming.
