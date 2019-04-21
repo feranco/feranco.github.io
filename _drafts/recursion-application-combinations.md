@@ -96,23 +96,24 @@ template <typename T>
 using PowerSet = std::vector<Set<T>>;
 
 template <typename T>
-void powerSet (const vector<T>& set, vector<T>& currentSet, vector<vector<T>>& powerSet, size_t idx) {
-  
-  if (idx == set.size) powerSet.push_back(currentSet); //ha senso passa current set al costruttore di vector che accetta un altro vector
-  
-  powerSet(set, currentSet, powerSet, idx+1); //current set without set[idx]
-  currentSet.push_back(set[idx]);
-  powerSet(set, currentSet, powerSet, idx+1); //current set with set[idx]  
-  currentSet.pop_back();
-  //this push_back and pop_back is a backtracking;
-  //if I create pass current set by copy this is not needed
-  /also not needed if I create a copy of current set and continue passing by references
+void generatePowerSet (const std::vector<T>& items, std::size_t i, PowerSet<T>& result, Set<T>& currentSet) {
+
+  if (i == items.size()) {
+    result.push_back(currentSet);
+    return;
+  }
+
+  generatePowerSet(items, i+1, result, currentSet);
+  Set<T> withCurrentItem = currentSet;
+  withCurrentItem.push_back(items[i]);
+  generatePowerSet(items, i+1, result, withCurrentItem);
 }
 
 template <typename T>
 PowerSet<T> powerSetParams (const std::vector<T>& items) {
   PowerSet<T> result;
-  generatePowerSet(items, 0, result, Set<T>());
+  Set<T> currentSet;
+  generatePowerSet(items, 0, result, currentSet);
   return result;
 }
 ```
