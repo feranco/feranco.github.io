@@ -57,19 +57,19 @@ template <typename T>
 using PowerSet = std::vector<Set<T>>;
 
 template <typename T>
-PowerSet<T> generatePowerSet (const std::vector<T>& items, unsigned int i) {
+PowerSet<T> generatePowerSet (const std::vector<T>& items, std::size_t i) {
 
   PowerSet<T> result;
 
   if (i == items.size()) {
-    result.emplace_back(Set<T>{});
+    result.push_back(Set<T>{});
     return result;
   }
 
   for (auto& set : generatePowerSet(items, i+1)) {
-    result.emplace_back(set);
-    set.emplace_front(items[i]);
-    result.emplace_back(set);
+    result.push_back(set);
+    set.push_front(items[i]);
+    result.push_back(set);
   }
 
   return result;
@@ -79,6 +79,7 @@ template <typename T>
 PowerSet<T> powerSetReturn (const std::vector<T>& items) {
   return generatePowerSet(items, 0);
 }
+
 ```
 Even if the function is not difficult to understand, it is worth to observe the following details:
 * each subset is returned as a list in order to have O(1) insertions and return the elements in the same order they were in the given input set;
@@ -104,9 +105,9 @@ void generatePowerSet (const std::vector<T>& items, std::size_t i, PowerSet<T>& 
   }
 
   generatePowerSet(items, i+1, result, currentSet);
-  Set<T> withCurrentItem = currentSet;
-  withCurrentItem.push_back(items[i]);
-  generatePowerSet(items, i+1, result, withCurrentItem);
+  currentSet.push_back(items[i]);
+  generatePowerSet(items, i+1, result, currentSet);
+  currentSet.pop_back();
 }
 
 template <typename T>
@@ -153,8 +154,8 @@ PowerSet<T> generatePowerSet (const std::vector<T>& items, unsigned int idx, uns
   result = withoutCurrentItem;
 
   for (auto& set : withCurrentItem) {
-    set.emplace_front(items[idx]);
-    result.emplace_back(set);
+    set.push_front(items[idx]);
+    result.push_back(set);
   }
 
   return result;
@@ -171,7 +172,7 @@ The following function implements the same algorithm using a passed variable to 
 
 ```cpp
 template <typename T>
-void generatePowerSet (const std::vector<T>& items, unsigned int idx, unsigned int targetLength, PowerSet<T>& result, Set<T> currentSet) {
+void generatePowerSet (const std::vector<T>& items, std::size_t idx, unsigned int targetLength, PowerSet<T>& result, Set<T>& currentSet) {
 
   if (currentSet.size() == targetLength) {
     result.push_back(currentSet);
@@ -181,18 +182,19 @@ void generatePowerSet (const std::vector<T>& items, unsigned int idx, unsigned i
   if (idx == items.size()) return;
 
   generatePowerSet(items, idx+1, targetLength, result, currentSet);
-  Set<T> withCurrentItem = currentSet;
-  withCurrentItem.emplace_back(items[idx]);
-  generatePowerSet(items, idx+1, targetLength, result, withCurrentItem);
+  currentSet.push_back(items[idx]);
+  generatePowerSet(items, idx+1, targetLength, result, currentSet);
+  currentSet.pop_back();
 }
 
 template <typename T>
 PowerSet<T> powerSetParams (const std::vector<T>& items, unsigned int targetLength) {
   PowerSet<T> result;
-  generatePowerSet(items, 0, targetLength, result, Set<T>());
+  Set<T> currentSet;
+  generatePowerSet(items, 0, targetLength, result, currentSet);
   return result;
 }
+
 ```
 
-return value is important to optimize with dynamic programming, because passed variable introduce like a global state that prevents to 
-catch the values that are used to cache results in dynamic programming.
+[//]: # (return value is important to optimize with dynamic programming, because passed variable introduce like a global state that prevents to catch the values that are used to cache results in dynamic programming.)
