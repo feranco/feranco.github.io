@@ -6,7 +6,7 @@ categories:
 tags:
   - Recursion
   - Backtracking
-last_modified_at: 2019-01-25T09:55:59-05:00
+last_modified_at: 2019-04-26T10:00:00-05:00
 ---
 
 A combination of a given set of object is a subset describing a selection of
