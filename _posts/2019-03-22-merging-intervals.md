@@ -129,7 +129,7 @@ vector<Meeting> mergeRanges(const vector<Meeting>& meetings)
 
 A better solution can be derived observing that merging a couple of meetings
 requires to determine which the meeting with the earlier start time (i.e. which
-is $M_{1}). So, if all meetings were sorted according to their start time, it
+is $M_{1}$). So, if all meetings were sorted according to their start time, it
 would be possible to solve the problem in one pass trying to merge each meeting
 with the one after it. The resulting implementation is included in the following
 code snapshot.
