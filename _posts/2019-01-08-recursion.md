@@ -77,4 +77,4 @@ int gcd (int p, int q) {
 
 Recursion can be applied to pretty much any problem, but there are certain scenarios for which it is particularly helpful. The following posts explore those scenarios:
 
-* [iterate through a data structure]({% post_url 2019-04-04-recursion-application-iteration.md %})
+* [iterate through a data structure]({% post_url 2018-04-04-recursion-application-iteration.md %})
