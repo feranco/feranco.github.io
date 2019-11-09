@@ -5,7 +5,7 @@ categories:
   - Algorithms
 tags:
   - Recursion
-last_modified_at: 2018-04-04T10:00:00-05:00
+last_modified_at: 2019-04-04T10:00:00-05:00
 ---
 
 The most straightforward application of recursion is to replace iteration using a recursive function instead of for/while loops. Such recursive functions allow to iterate over data structures, taking as parameter the index that would be used in a for loop. As an example, let's consider the following code printing a c++ vector:
