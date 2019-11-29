@@ -53,15 +53,15 @@ vector<int> twoSum(vector<int>& numbers, int target) {
 
 ## 2Sum Variants
 
-**Two sum less than K:** Given an array A of integers and integer K, return the maximum S such that there exists i < j with A[i] + A[j] = S and S < K. 
+**Two sum less than K:** *Given an array A of integers and integer K, return the maximum S such that there exists i < j with A[i] + A[j] = S and S < K.*
 
 The optimal solution is to sort the array and then use the 2 pointers method as explained before.
 
-**Two sum class design:** Design and implement a TwoSum class supporting the following operations: add (add the number to an internal data structure) and find (find if there exists any pair of numbers which sum is equal to the value).
+**Two sum class design:** *Design and implement a TwoSum class supporting the following operations: add (add the number to an internal data structure) and find (find if there exists any pair of numbers which sum is equal to the value).*
 
 The optimal solution is to use the hash map approach explained before with a slight modification. In this case the hash map shall map each number to its frequency so that it is possible to discard all cases where the complement of a value is the value itself, but its frequency in the map is 1.
 
-**Two sum input is a BST:** Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is equal to the given target.
+**Two sum input is a BST:** *Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is equal to the given target.*
 
 The idea is to take advantage of the BST properties to get a sorted array with all the value in the BST. The 2 pointers method can then be applied to find a solution.
 
