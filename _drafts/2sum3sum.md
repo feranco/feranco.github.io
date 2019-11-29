@@ -1,26 +1,26 @@
 ---
 layout: post
-title: 2Sum3Sum4Sum
+title: 2Sum, 3Sum, 4Sum
 categories:
   - Problems
 tags:
   - Arrays
   - Math
-last_modified_at: 2018-07-14T09:55:59-05:00
+last_modified_at: 2019-11-24T09:55:59-05:00
 ---
 
-2Sum, 3Sum and 4Sum are popular coding interview questions. Each one of themhas several variations that looks more complicated, but have the same complexity as the basic form in the end. Let's start with the basic 2Sum question that will be the basic building block for all the other problems..
+2Sum, 3Sum and 4Sum are popular coding interview questions. Each one of them has several variations that looks more complicated than the original one, but ultimately their solution is not so different. Let's start with the basic 2Sum question, since it will be the basic building block for all the other problems.
 
 ## 2Sum
 
-Given an array of integers, return indices of the two numbers such that theyadd up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same element twice.
+Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
 The brute force solution for this problem is pretty obvious: use 2 loops to iterate over all the possible pairs of numbers and check if each of them sums up to the target. This solution has O(n<sup>2</sup>) time and O(1) space complexity. The trick to improve this solution is to trade space for time. An hash map can be used to map each number to its index so that it is possible to check if the complement of an element with index i (target-num[i]) is in the table. This solution has O(n) time and O(n) space. Note that it is possible to insert the elements in the hash table directly while looking for a solution, without prebuilding a hash map with all the elements.
 
 ```cpp
 vector<int> twoSum(vector<int>& nums, int target) {
-        
-        unordered_map<int, size_t> num2idx;
+
+	unordered_map<int, size_t> num2idx;
         
         for (size_t i = 0; i < nums.size(); ++i) {
             
