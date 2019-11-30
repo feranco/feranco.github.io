@@ -69,7 +69,7 @@ The idea is to take advantage of the BST properties to get a sorted array with a
 
 *Given an array nums of n integers, find all unique triplets in the array which gives the sum of zero.*
 
-The brute force solution for this problem is to use 2 loops to iterate over all the possible triplets of numbers and check if each of them sums up to zero. This solution has O(n<sup>3</sup>) time and O(1) space complexity. Anyway once one number X in the array has been fixed, the problem is reduced in finding 2 numbers that sum up to -X. This is exactly the 2sum question and can be solved in O(N) time. It is worth to sort the input array for 2 reasons. First, the big O complexity of the solution is not affected by the sorting step and solving the 2 sum problem without using a hash map is by far more efficient in terms of cache usage. Second, using a sorting array allows to skip duplicates on the fly without using additional data structures (i.e. hash set). The overall time complexity is O(n<sup>2</sup>) with O(1) space complexity.
+The brute force solution for this problem is to use 3 loops to iterate over all the possible triplets of numbers and check if each one of them sums up to zero. This solution has O(n<sup>3</sup>) time and O(1) space complexity. Anyway once one number X in the array has been fixed, the problem is reduced to finding 2 numbers that sum up to -X. This is exactly the 2sum question and can be solved in O(N) time. It is worth to sort the input array for 2 reasons. First, the big O complexity of the solution is not affected by the sorting step and solving the 2 sum problem without using a hash map is by far more efficient in terms of cache usage. Second, using a sorting array allows to skip duplicates on the fly without using additional data structures (i.e. hash set). The overall time complexity is O(n<sup>2</sup>) with O(1) space complexity.
 
 ```cpp
 
@@ -108,13 +108,76 @@ The brute force solution for this problem is to use 2 loops to iterate over all 
 
 ## 3Sum Variants
 
-##3Sum Closest:## #Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target.#
+**3Sum Closest:** *Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target.*
 
 The optimal solution is to sort the array, fix one element X at a time and reduce the problem to 2 sum finding the pair of numbers closest to -X. After each iteration of the 2sum problem the final result can be updated if a closest pair to -X has been found. The absoulte value shall be used in measuring the closest pair to -X.
 
-##3Sum Smaller:## #Given an array of n integers nums and a target, find the number of index triplets i, j, k with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.#
+**3Sum Smaller:** *Given an array of n integers nums and a target, find the number of index triplets i, j, k with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.*
 
 Fixed an integer X, the problem is reduced to find all the possible pairs of elements whose sum is less than -X. Once the array is sorted, the 2Sum step can be optimized taking into account that if the sum the numbers identified by the two pointers is less then -X, all the pai
 
+## 4Sum
 
+*Given an array nums of n integers and an integer target, find all unique quadruplets in the array which gives the sum of a target number.*
+
+Similarly to the previous problems, the brute force solution is to use 4 loops to iterate over all the possible quadruplets of numbers and check if each one of them sums up to zero. This solution has O(n<sup>4</sup>) time and O(1) space complexity. Once one number X in the array has been fixed, the problem is reduced to finding 3 numbers that sum up to -X. This is exactly the 3sum question and can be solved in O(n<sup>2</sup>) time. Sorting the input array as preprocessing step enables to skip duplicates quadruplets on the fly without using additional data structures (i.e. hash set). The overall time complexity is O(n<sup>3</sup>) with O(1) space complexity.
+
+```cpp
+
+	void twoSum (vector<int> const& nums, int target, int d, int c, int left, vector<vector<int>>& ans) {
+		
+		int right = nums.size()-1;
+		
+		while (left < right) {
+            
+			int sum = nums[left] + nums[right]; 
+			
+			if (sum == target) {
+				ans.emplace_back(initializer_list<int>{d,c,nums[left++],nums[right]});
+				while (left < right && nums[left] == nums[left-1]) ++left;
+			}
+			else if (sum < target) ++left;
+			else --right;
+		}
+	}
+	
+	void threeSum (vector<int> const& nums, int target, int d, int start, vector<vector<int>>& ans) {
+		
+		for (int i = start, iterations = nums.size()-2; i < iterations; ++i) {
+            
+            if (i > start && nums[i] == nums[i-1]) continue;
+            twoSum(nums, target-nums[i], d, nums[i], i+1, ans);    
+        }
+	}
+
+
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+       
+        vector<vector<int>> quadruplets;
+        sort(nums.begin(), nums.end());
+       
+        for (int i = 0, iterations = nums.size()-3; i < iterations; ++i) {
+            
+            if (i > 0 && nums[i] == nums[i-1]) continue;
+            threeSum(nums, target-nums[i], nums[i], i+1, quadruplets);   
+        }
+       
+        return quadruplets;
+    }
+
+```
+
+If the uniqueness of the quadruplets is not required, it is easy to trade space for time in order to improve the solution.
+The key observation is that for a quadruplet of numbers a,b,c,d, the equation a+b+c+d=t can be rewritten as a+b=t-c-d. So
+the idea is to use a hash map to store all the possible complements t-c-d together with their frequency, generate all the possible values a+b and check them against the map. The time complexity of this solution is O(n^2), necessary both to generate the complements t-c-d and the values a+b. The space complexity is O(n^2) because in the worst case all the complements are different and shall be stored in the hash map with frequecy 1. 
+
+## 4Sum Variants
+
+*Given four lists A, B, C, D of integer values, compute how many tuples (i, j, k, l) there are such that A[i] + B[j] + C[k] + D[l] is zero.*
+
+The problem can be solved using the hash map approach described above.
+
+## Conclusion
+
+The C++ code for all the problems described in this post and their variant is available in my
 
