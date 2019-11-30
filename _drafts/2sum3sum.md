@@ -6,7 +6,7 @@ categories:
 tags:
   - Arrays
   - Math
-last_modified_at: 2019-11-24T09:55:59-05:00
+last_modified_at: 2019-11-29T09:55:59-05:00
 ---
 
 2Sum, 3Sum and 4Sum are popular coding interview questions. Each one of them has several variations that looks more complicated than the original one, but ultimately their solution is not so different. Let's start with the basic 2Sum question, since it will be the basic building block for all the other problems.
@@ -179,5 +179,5 @@ The problem can be solved using the hash map approach described above.
 
 ## Conclusion
 
-The C++ code for all the problems described in this post and their variant is available in  my [Github repository](https://github.com/feranco/Problems/tree/master/Arrays/2Sum3Sum4Sum).
+The C++ code for all the problems described in this post and their variant is available in my [Github repository](https://github.com/feranco/Problems/tree/master/Arrays/2Sum3Sum4Sum).
 
