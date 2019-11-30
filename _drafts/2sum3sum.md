@@ -20,15 +20,15 @@ The brute force solution for this problem is pretty obvious: use 2 loops to iter
 ```cpp
 vector<int> twoSum(vector<int>& nums, int target) {
 
-	unordered_map<int, size_t> num2idx;
-        
-	for (size_t i = 0; i < nums.size(); ++i) {
-            
-	if (num2idx.count(target-nums[i])) return {num2idx[target-nums[i]],i};            
-		num2idx[nums[i]] = i;
-	}
+    unordered_map<int, size_t> num2idx;
 
-	return {};
+    for (size_t i = 0; i < nums.size(); ++i) {
+
+    if (num2idx.count(target-nums[i])) return {num2idx[target-nums[i]],i};            
+	    num2idx[nums[i]] = i;
+    }
+
+    return {};
 }
 
 ```
@@ -38,15 +38,15 @@ If the given array of numbers is already sorted, it is possible to get a better 
 ```cpp
 vector<int> twoSum(vector<int>& numbers, int target) {
         
-	size_t i = 0, j = numbers.size()-1;
+    size_t i = 0, j = numbers.size()-1;
 
-	while (i < j) {            
-		int sum = numbers[i] + numbers[j];
-		if (sum == target) return {i+1,j+1};
-		else if (sum < target) i++;
-		else j--;
-	}
-	return {};
+    while (i < j) {            
+	    int sum = numbers[i] + numbers[j];
+	    if (sum == target) return {i+1,j+1};
+	    else if (sum < target) i++;
+	    else j--;
+    }
+    return {};
 }
 
 ```
@@ -73,36 +73,36 @@ The brute force solution for this problem is to use 3 loops to iterate over all 
 
 ```cpp
 
-   void twoSum(vector<int> const& nums, int left, int target, vector<vector<int>>& ans) {
-        
-        int right = nums.size()-1;
-        
-        while (left < right) {            
-            int sum = nums[left] + nums[right];
-            if (sum == target) {
-                ans.emplace_back(initializer_list({-target, nums[left++], nums[right--]}));
-                while (left < right && nums[left-1] == nums[left]) ++left; //skip duplicates
-                while (left < right && nums[right+1] == nums[right]) --right; //skip duplicates
-            }
-            else if (sum < target) ++left;
-            else --right;  
-        }
+void twoSum(vector<int> const& nums, int left, int target, vector<vector<int>>& ans) {
+
+    int right = nums.size()-1;
+
+    while (left < right) {            
+	int sum = nums[left] + nums[right];
+	if (sum == target) {
+	    ans.emplace_back(initializer_list({-target, nums[left++], nums[right--]}));
+	    while (left < right && nums[left-1] == nums[left]) ++left; //skip duplicates
+	    while (left < right && nums[right+1] == nums[right]) --right; //skip duplicates
+	}
+	else if (sum < target) ++left;
+	else --right;  
     }
-    
-    vector<vector<int>> threeSum(vector<int>& nums) {
-        
-        sort(nums.begin(), nums.end());
-        
-        vector<vector<int>> triplets;
-        
-        for (int i=0, iterations = (nums.size()-2); i<iterations; ++i) {
-            //skip duplicates
-            if(i == 0 || nums[i] != nums[i-1])
-                twoSum(nums, i+1, -nums[i], triplets); //a+b+c=0 -> a+b=-c; nums[i] = c
-        }
-        
-        return triplets;
+}
+
+vector<vector<int>> threeSum(vector<int>& nums) {
+
+    sort(nums.begin(), nums.end());
+
+    vector<vector<int>> triplets;
+
+    for (int i=0, iterations = (nums.size()-2); i<iterations; ++i) {
+	//skip duplicates
+	if(i == 0 || nums[i] != nums[i-1])
+	    twoSum(nums, i+1, -nums[i], triplets); //a+b+c=0 -> a+b=-c; nums[i] = c
     }
+
+    return triplets;
+}
 
 ```
 
@@ -124,46 +124,46 @@ Similarly to the previous problems, the brute force solution is to use 4 loops t
 
 ```cpp
 
-	void twoSum (vector<int> const& nums, int target, int d, int c, int left, vector<vector<int>>& ans) {
-		
-		int right = nums.size()-1;
-		
-		while (left < right) {
-            
-			int sum = nums[left] + nums[right]; 
-			
-			if (sum == target) {
-				ans.emplace_back(initializer_list<int>{d,c,nums[left++],nums[right]});
-				while (left < right && nums[left] == nums[left-1]) ++left;
-			}
-			else if (sum < target) ++left;
-			else --right;
-		}
-	}
-	
-	void threeSum (vector<int> const& nums, int target, int d, int start, vector<vector<int>>& ans) {
-		
-		for (int i = start, iterations = nums.size()-2; i < iterations; ++i) {
-            
-            if (i > start && nums[i] == nums[i-1]) continue;
-            twoSum(nums, target-nums[i], d, nums[i], i+1, ans);    
-        }
-	}
+void twoSum (vector<int> const& nums, int target, int d, int c, int left, vector<vector<int>>& ans) {
 
+    int right = nums.size()-1;
 
-    vector<vector<int>> fourSum(vector<int>& nums, int target) {
-       
-        vector<vector<int>> quadruplets;
-        sort(nums.begin(), nums.end());
-       
-        for (int i = 0, iterations = nums.size()-3; i < iterations; ++i) {
-            
-            if (i > 0 && nums[i] == nums[i-1]) continue;
-            threeSum(nums, target-nums[i], nums[i], i+1, quadruplets);   
-        }
-       
-        return quadruplets;
+    while (left < right) {
+
+	int sum = nums[left] + nums[right]; 
+
+	if (sum == target) {
+		ans.emplace_back(initializer_list<int>{d,c,nums[left++],nums[right]});
+		while (left < right && nums[left] == nums[left-1]) ++left;
+	}
+	else if (sum < target) ++left;
+	else --right;
     }
+}
+
+void threeSum (vector<int> const& nums, int target, int d, int start, vector<vector<int>>& ans) {
+
+    for (int i = start, iterations = nums.size()-2; i < iterations; ++i) {
+
+    	if (i > start && nums[i] == nums[i-1]) continue;
+    	twoSum(nums, target-nums[i], d, nums[i], i+1, ans);    
+    }
+}
+
+
+vector<vector<int>> fourSum(vector<int>& nums, int target) {
+
+    vector<vector<int>> quadruplets;
+    sort(nums.begin(), nums.end());
+
+    for (int i = 0, iterations = nums.size()-3; i < iterations; ++i) {
+
+	if (i > 0 && nums[i] == nums[i-1]) continue;
+	threeSum(nums, target-nums[i], nums[i], i+1, quadruplets);   
+    }
+
+    return quadruplets;
+}
 
 ```
 
