@@ -179,5 +179,5 @@ The problem can be solved using the hash map approach described above.
 
 ## Conclusion
 
-The C++ code for all the problems described in this post and their variant is available in my
+The C++ code for all the problems described in this post and their variant is available in  my [Github repository](https://github.com/feranco/Problems/tree/master/Arrays/2Sum3Sum4Sum).
 
