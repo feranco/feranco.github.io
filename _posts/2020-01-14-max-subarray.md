@@ -6,7 +6,7 @@ categories:
 tags:
   - Arrays
   
-last_modified_at: 2020-01-11T09:55:59-05:00
+last_modified_at: 2020-01-14T09:55:59-05:00
 ---
 
 # Problem definition
@@ -103,7 +103,7 @@ int maxSubArray(vector<int>& nums) {
 }
 ```
 
-The time complexity of the divide and conquer approach is O(N<sup>logN</sup>)
+The time complexity of the divide and conquer approach is O(NlogN).
 
 # Kanade's algorithm
 
