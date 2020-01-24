@@ -393,6 +393,81 @@ int main()
 ```
 The described mechanism is absolutely generic and can be extended the the case where a thread needs to return multiple values at different points of time. The onlt thing to do ispass multiple std::promise objects to the created thread and fetch multiple return values from their associated multiple std::future objects.
 
-#
+# Packaged Task and Asynch
+
+In addition to std::promise, there are other two ways to associate a thread to a std::future object: std::packaged_task and std::asynch.
+
+A std::packaged_task is a class template that wraps a callable element and transfers its result automatically to a std::future object, so that it can be retrieved asynchronously using the std::future get() method. Similarly to std::function, the template parameter of std::packaged_task is the signature of the function, while its constructor takes the function as an argument. Then the get_future() member function creates a future with the same template parameter as the return type of the function. The execution of a packaged_task object starts only when it is invoked in the same thread or it is moved to another thread.
+
+```cpp
+#include <iostream>
+#include <thread>
+#include <future>
+#include <string>
+ 
+int main()
+{
 
 
+	// Create two packaged_tasks that encapsulated a lambda function
+	std::packaged_task<int (int)> taskSum([](int x){
+			return x+1;
+	});
+	
+	std::packaged_task<int (int)> taskSub([](int x){
+			return x-1;
+	});
+ 
+	// Fetch the associated futures from packaged_tasks
+	std::future<int> resultSum = taskSum.get_future();
+	std::future<int> resultSub = taskSub.get_future();
+ 
+	// Execute taskSub in a separated thread
+	std::thread t1(std::move(taskSub), 1);
+	t1.join();
+	
+	// Execute taskSum in the same thread
+	taskSum(1);
+ 
+	// Fetch the results frome the futures
+	int dataSum =  resultSum.get();
+	int dataSub =  resultSub.get();
+ 
+	std::cout <<  dataSum << " " << dataSub << std::endl;
+	
+}
+```
+
+A std::asynch is a function template that takes a function as an argument and returns a std::future, so that the result of the function can be retrieved asynchronously using the std::future get() method. The future has the same template parameter as the return type of the function.
+
+First argument in std::async is launch policy, it control the asynchronous behaviour of std::async. We can create std::async with 3 different launch policies i.e.
+
+The execution can be bla bla
+
+
+When the function returns, its return value sets the future.
+Therefore, the std::async communicates the value at the end of the function call. For example:
+
+```cpp
+#include <iostream>
+#include <thread>
+#include <future>
+#include <string>
+ 
+int main()
+{
+	// create and launch sum computation as a separate thread
+	std::future<int> resultSum = std::async(std::launch::async, [](int x){
+			
+			return x+1;
+	},1);
+ 
+	
+	// Fetch the results frome the futures
+	int dataSum =  resultSum.get();
+ 
+	std::cout <<  dataSum << std::endl;
+ 
+	return 0;
+}
+```
