@@ -393,9 +393,9 @@ int main()
 ```
 The described mechanism is absolutely generic and can be extended the the case where a thread needs to return multiple values at different points of time. The onlt thing to do ispass multiple std::promise objects to the created thread and fetch multiple return values from their associated multiple std::future objects.
 
-# Packaged Task and Asynch
+# Packaged Task and Async
 
-In addition to std::promise, there are other two ways to associate a thread to a std::future object: std::packaged_task and std::asynch.
+In addition to std::promise, there are two ways to associate a thread to a std::future object: std::packaged_task and std::async.
 
 A std::packaged_task is a class template that wraps a callable element and transfers its result automatically to a std::future object, so that it can be retrieved asynchronously using the std::future get() method. Similarly to std::function, the template parameter of std::packaged_task is the signature of the function, while its constructor takes the function as an argument. Then the get_future() member function creates a future with the same template parameter as the return type of the function. The execution of a packaged_task object starts only when it is invoked in the same thread or it is moved to another thread.
 
@@ -436,14 +436,11 @@ int main()
 }
 ```
 
-A std::asynch is a function template that takes a function as an argument and returns a std::future, so that the result of the function can be retrieved asynchronously using the std::future get() method. The future has the same template parameter as the return type of the function. The first argument in std::async is launch policy that controls the asynchronous behaviour of std::async. We can create std::async with two different launch policies i.e.
+A std::async is a function template that takes a function as an argument and returns a std::future, so that the result of the function can be retrieved asynchronously using the std::future get() method. The future has the same template parameter as the return type of the function. The first argument in std::async is optional and allows to define the launch policy that controls how the passed function is executed. There are two different launch policies:
 * **std::launch::async** guarantees an asynchronous execution of the passed function in a separate thread
-* **std::launch::deferred** guarantees a lazy execution of the passed function in the same thread owning the std::future object (the function will be executed only when the std::future get() method is called)
-If no launch policy is specified, the behaviour is implementation dependent (some impl can decide to run asynchronously or not depending on the load on system).
-
-
-When the function returns, its return value sets the future.
-Therefore, the std::async communicates the value at the end of the function call. For example:
+* **std::launch::deferred** guarantees a lazy execution of the passed function in the same thread owning the std::future object (the execution starts only when the std::future get() method is called)
+If no launch policy is specified, the behaviour is implementation dependent. Some implementations can decide to run the function asynchronously or not depending on the current system load.
+The other std::async parameterss are the function to be executed and its input arguments. 
 
 ```cpp
 #include <iostream>
@@ -465,3 +462,9 @@ int main()
     return 0;
 }
 ```
+
+Both std::asynch and std::packaged_task allows to wrap a function and possibly execute it in a separated thread. Moreover both std::asynch and std::packaged_task sets the function return value to the std::future only at the end of the function execution.  Anyway, a std::packaged_task can be considered as a lower level construct for implementing std::async: std::async wraps a std::packaged_task and possibly calls it in a different thread.
+
+To summarize:
+* the main advantage of std::packaged_task over std::async is to decouple the creation of the std::future from the execution of the function
+* the main advantage of combining std::promise and std::future over both std::asynch and std::packaged_task is that they give more control over the std::future object. This because the std::promise can set the value to the std::future also at a different time than at the end of the function call.
