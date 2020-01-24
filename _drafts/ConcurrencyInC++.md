@@ -380,7 +380,7 @@ void getInt(std::promise<int>* promInt)
     std::this_thread::sleep_for(std::chrono::seconds(1));    
     promInt->set_value(100);
 }
- 
+     
 int main()
 {
     std::promise<int> promisedInt;
@@ -407,42 +407,39 @@ A std::packaged_task is a class template that wraps a callable element and trans
  
 int main()
 {
+    // Create two packaged_tasks that encapsulated a lambda function
+    std::packaged_task<int (int)> taskSum([](int x){
+        return x+1;
+    });
+	
+     std::packaged_task<int (int)> taskSub([](int x){
+        return x-1;
+    });
+ 
+    // Fetch the associated futures from packaged_tasks
+    std::future<int> resultSum = taskSum.get_future();
+    std::future<int> resultSub = taskSub.get_future();
 
+    // Execute taskSub in a separated thread
+    std::thread t1(std::move(taskSub), 1);
+    t1.join();
 
-	// Create two packaged_tasks that encapsulated a lambda function
-	std::packaged_task<int (int)> taskSum([](int x){
-			return x+1;
-	});
-	
-	std::packaged_task<int (int)> taskSub([](int x){
-			return x-1;
-	});
- 
-	// Fetch the associated futures from packaged_tasks
-	std::future<int> resultSum = taskSum.get_future();
-	std::future<int> resultSub = taskSub.get_future();
- 
-	// Execute taskSub in a separated thread
-	std::thread t1(std::move(taskSub), 1);
-	t1.join();
-	
-	// Execute taskSum in the same thread
-	taskSum(1);
- 
-	// Fetch the results frome the futures
-	int dataSum =  resultSum.get();
-	int dataSub =  resultSub.get();
- 
-	std::cout <<  dataSum << " " << dataSub << std::endl;
-	
+    // Execute taskSum in the same thread
+    taskSum(1);
+
+    // Fetch the results frome the futures
+    int dataSum =  resultSum.get();
+    int dataSub =  resultSub.get();
+
+    std::cout <<  dataSum << " " << dataSub << std::endl;
+    return 0;
 }
 ```
 
-A std::asynch is a function template that takes a function as an argument and returns a std::future, so that the result of the function can be retrieved asynchronously using the std::future get() method. The future has the same template parameter as the return type of the function.
-
-First argument in std::async is launch policy, it control the asynchronous behaviour of std::async. We can create std::async with 3 different launch policies i.e.
-
-The execution can be bla bla
+A std::asynch is a function template that takes a function as an argument and returns a std::future, so that the result of the function can be retrieved asynchronously using the std::future get() method. The future has the same template parameter as the return type of the function. The first argument in std::async is launch policy that controls the asynchronous behaviour of std::async. We can create std::async with two different launch policies i.e.
+* **std::launch::async** guarantees an asynchronous execution of the passed function in a separate thread
+* **std::launch::deferred** guarantees a lazy execution of the passed function in the same thread owning the std::future object (the function will be executed only when the std::future get() method is called)
+If no launch policy is specified, the behaviour is implementation dependent (some impl can decide to run asynchronously or not depending on the load on system).
 
 
 When the function returns, its return value sets the future.
@@ -456,18 +453,15 @@ Therefore, the std::async communicates the value at the end of the function call
  
 int main()
 {
-	// create and launch sum computation as a separate thread
-	std::future<int> resultSum = std::async(std::launch::async, [](int x){
-			
-			return x+1;
-	},1);
- 
-	
-	// Fetch the results frome the futures
-	int dataSum =  resultSum.get();
- 
-	std::cout <<  dataSum << std::endl;
- 
-	return 0;
+    // create and launch sum computation as a separate thread
+    std::future<int> resultSum = std::async(std::launch::async, [](int x){
+        return x+1;
+    },1);
+
+    // Fetch the results frome the futures
+    int dataSum =  resultSum.get();
+
+    std::cout <<  dataSum << std::endl;
+    return 0;
 }
 ```
