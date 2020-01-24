@@ -7,7 +7,7 @@ tags:
   - C++
   - Threads
   
-last_modified_at: 2020-01-14T09:55:59-05:00
+last_modified_at: 2020-01-24T21:55:59-05:00
 ---
 
 This post is a summary of how multithreading and concurrency are managed in C++.
