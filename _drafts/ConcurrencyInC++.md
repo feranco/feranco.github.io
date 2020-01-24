@@ -472,6 +472,6 @@ To summarize:
 # References 
 
 * [ThisPointer](https://thispointer.com//c-11-multithreading-part-1-three-different-ways-to-create-threads/)
-* [Jakscorner](http://jakascorner.com/blog/2016/03/promise-difference.html)
+* [Jakascorner](http://jakascorner.com/blog/2016/03/promise-difference.html)
 * [EliTheGreenPlace](https://eli.thegreenplace.net/2016/the-promises-and-challenges-of-stdasync-task-based-parallelism-in-c11/)
 * [ACodersJourney](https://www.acodersjourney.com/top-20-cplusplus-multithreading-mistakes/)
