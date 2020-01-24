@@ -70,7 +70,7 @@ There are two different ways to handle the lifetime of a thread: std::thread::jo
 
 After calling join or detach, the std::thread instance has no longer a callback associated to it.  (default constructed) will cause the program to terminate.
 
-It is important to always join or detach a std::thread instance with an associated callback, otherwise the std::thread destructor will terminate the program invoking the std::terminate exception. The same behaviour happen calling join or detach on a std::thread instance without an associated callback (i.e. a default constructed thread or a std::thread instance for which join or detach was already called). A strategy to prevent these undesidered terminations is to the RAII paradigma (Resource Acquisition is Initialization) creating a wrapper for std::thread that joins automatically at the end of its scope.
+It is important to always join or detach a std::thread instance with an associated callback, otherwise the std::thread destructor will terminate the program invoking the std::terminate exception. The same behaviour happen calling join or detach on a std::thread instance without an associated callback (i.e. a default constructed thread or a std::thread instance for which join or detach was already called). A strategy to prevent these undesidered terminations is to apply the RAII paradigma (Resource Acquisition is Initialization) creating a wrapper for std::thread that joins automatically at the end of its scope.
 
 ```cpp
 #include <iostream>
@@ -228,7 +228,7 @@ int main()
 
 ```
 
-Instead of using a raw std::mutex a better option is to use std::lock_guard, which is a class template implementimg the RAII idiom for mutex. It is essentially a wrapper for the raw std::mutex that locks the mutex in its constructor and unlock the mutex in its destructor.
+Instead of using a raw std::mutex a better option is to use std::lock_guard, which is a class template implementing the RAII idiom for mutex. It is essentially a wrapper for the raw std::mutex that locks the mutex in its constructor and unlock the mutex in its destructor.
 
 ```cpp
 class CounterWrapper
@@ -468,3 +468,10 @@ Both std::asynch and std::packaged_task allows to wrap a function and possibly e
 To summarize:
 * the main advantage of std::packaged_task over std::async is to decouple the creation of the std::future from the execution of the function
 * the main advantage of combining std::promise and std::future over both std::asynch and std::packaged_task is that they give more control over the std::future object. This because the std::promise can set the value to the std::future also at a different time than at the end of the function call.
+
+# References 
+
+* [ThisPointer](https://thispointer.com//c-11-multithreading-part-1-three-different-ways-to-create-threads/)
+* [Jakscorner](http://jakascorner.com/blog/2016/03/promise-difference.html)
+* [EliTheGreenPlace](https://eli.thegreenplace.net/2016/the-promises-and-challenges-of-stdasync-task-based-parallelism-in-c11/)
+* [ACodersJourney](https://www.acodersjourney.com/top-20-cplusplus-multithreading-mistakes/)
