@@ -60,7 +60,7 @@ After dividing the array into 2 equal sized subarrays, the max subarray is entir
 * calculate the max sum for a subarray including the mid element.
 * get the maximum of the three sums computed in the steps above.
 
-The cases where the subarray is entirely contained in the right or on the left half are smaller instances of the original problem. Therefore they can be solved recursively by calling the function to calculate the maximum sum subarray on both the halves of the array. The third case is not a smaller instance of the original problem, because it contains the constrint that the subarray must contain the mid element. The solution can be computed using two loops. The first iterates from the rightmost element of the left subarray (the mid element of the array) to its leftmost element, finding the maximum sum on the left side including its rightmost element. The second iterates from the leftmost element of the right subarray (the one after the mid element of the array) to its rightmost element, finding the maximum sum on the right side including its leftmost element. The maximum sums computed in the two loops are then added to get the max sum containing the mid element.
+The cases where the subarray is entirely contained in the right or on the left half are smaller instances of the original problem. Therefore they can be solved recursively by calling the function to calculate the maximum sum subarray on both the halves of the array. The third case is not a smaller instance of the original problem, because it has the constraint that the subarray must contain the mid element. The solution can be computed using two loops. The first iterates from the mid element of the array to its leftmost element, finding the maximum sum on the left side including the mid element. The second iterates from the element after the mid element of the array to its rightmost element, finding the maximum sum on the right side including the element after the mid one. The maximum sums computed in the two loops are then added to get the max sum containing the mid element.
 
 ```cpp
 int maxSubArraySumAcrossM(vector<int> const& nums, int l, int m, int r) { 
@@ -107,7 +107,7 @@ The time complexity of the divide and conquer approach is O(NlogN).
 
 # Kanade's algorithm
 
-The Kanade's algorithm is based on the observation that the maximum sum of a subarray ending at a given index “i” can be computed obtained either adding the element at index “i” to the maximum sum of a subarray ending at index “i-1” or starting a new sum with the element at index “i”. So, the solution to the problem can be described using the following recursive formula: MS(i) = max[MS(i-1) + A[i] , A[i]] , where MS(i) is the maximum sum of a subarray ending at index i. The time complexity of this approach is O(N) and it is optimal.
+The Kanade's algorithm is based on the observation that the maximum sum of a subarray ending at a given index “i” can be computed either adding the element at index “i” to the maximum sum of a subarray ending at index “i-1” or starting a new sum with the element at index “i”. So, the solution to the problem can be described using the following recursive formula: MS(i) = max[MS(i-1) + A[i] , A[i]] , where MS(i) is the maximum sum of a subarray ending at index i. The time complexity of this approach is O(N) and it is optimal.
 
 ```cpp
 int maxSubArray(vector<int>& nums) {       
@@ -130,7 +130,7 @@ int maxSubArray(vector<int>& nums) {
 Two last remarks about Kanade's algorithm:
 
 * it is not a dynamic programming algorithm because it exhibits optimal substructure (the current solution can be computed using the previous solutions) but not overlapping subproblems (every solution is computed only once)
-* it is not a greedy algorithm because it makes locally optimal choices, but it can then discard the solution obtained with this choices to start a new (better) solution.
+* it is not a greedy algorithm because it makes locally optimal choices, but it can discard the solution obtained with this choices to start a new (better) solution.
 
 # Conclusion
 
