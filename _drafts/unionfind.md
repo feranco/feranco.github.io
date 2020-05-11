@@ -19,14 +19,25 @@ The data structure provides the following operations:
 
 The first step to implement the DSU is to define a way to represent the subsets. The most common way is to represent the subsets in the form of trees, using the root of the tree as representative element of the set. Instead of using the classical tree representation with nodes and link to child nodes, it is convenient to represent such trees using arrays. Without loss of generality we can assume that every element of a set  an array **Parents**. Every element of the array corresponds to an element of a subset and contains the index of its parent in the subset tree. A special case is the root of the tree which contains its own index. At the beginning, before any Union operation has been performed, every element is the root of its own subset.
 
-# Naive Implementations: quick find
+# Naive Implementations: quick find and quick union
 
 The easiest implementation of the DSU assumes that two elements belong to the same set only if they have the same parent. This leads to the following implementation:
 * MakeSet(v): assign the index v to parents[v]
-* Union(v, w): assign parents[w] to all elements having parents[v] as parent
+* Union(v, w): assign parents[w] as parent to all elements having parents[v] 
 * Find(v, w): check if v and w have the same parent
 
-This implementation is also known as quick find since the Find operation (and the MakeSet) is performed in constant time. The Union operation takes instead linear time since evert time the entire parents array is traversed.
+This implementation is also known as quick find since the Find operation (and the MakeSet) is performed in constant time. The Union operation takes instead linear time since every time the entire parents array is traversed.
+
+An alternative implementation of the DSU assumes that two elements belong to the same set only if they have the same root. This leads to the following implementation: 
+* MakeSet(v): assign the index v to parents[v] as before
+* Union(v, w): assign root[w] as parent to root[v]
+* Find(v, w): check if v and w have the same root
+
+Both the Union and the Find operation require a FindRoot operation to retrieve the roots of the given elements. This operation takes in the worst case linear time because it requires to visit all the ancestors of the given element until the root has not been reached. This implementation is also known as quick union since on average the union operation takes less than the one in the quick find (not always the entire parents array needs to be traversed).
+
+# Weighted Union
+
+The Union operation of the quick union always attach the root of the tree of the first element to the root of the tree of the second one. The Weighted Union implementation of the DSU modifies the Union operation so that the root of the tree having less elements is always attached to the root of the tree having more elements.
 
 the disjoint-set-union, can reduce the execution time of an algorithm
 
