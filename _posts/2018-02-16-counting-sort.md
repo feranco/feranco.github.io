@@ -8,7 +8,24 @@ tags:
 last_modified_at: 2018-03-26T23:55:59-05:00
 ---
 
-While all comparison-based algorithms have a time complexity of O(nlog<sub>n</sub>), there are other algorithms running in linear time provided that some assumptions about the input are verified. Counting sort is an algorithm that has a time complexity of O(n), assuming that each of the n input elements is an integer in the range 0 to k or has an integer key in that range. Counting sort uses two temporary arrays:
+While all comparison-based algorithms have a time complexity of O(nlog<sub>n</sub>) to sort n input elements, there are sorting algorithms running in linear time provided that some assumptions about the input are verified. Counting sort is an algorithm that has a time complexity of O(n), assuming that each of the n input elements is an integer in the range 0 to k or has an integer key in that range. Counting sort is based on the idea that the frequency of the keys can be used to determine the position of the input elements in the sorted output. 
+
+# Counting the frequencies
+
+According to the assumption that the keys are in the range 0 to k, the frequency of the keys can be easily computed using an integer array of size k+1 initialized with zeros. Since the i-th element of this array will be used to count the frequency of the key i, we can call it the **counter** array. We can fill the **counter** array with the actual frequencies of the keys iterating through the input array once and increasing the counter corresponding to the current input key.
+
+ <figure>
+        <img src="/assets/images/countersort1.png"/>
+ </figure>
+
+# Building the sorted output
+
+If there are only integer keys without attached values, it is trivial to build the sorted output. iterating through the counter array and filling the sorted output with the occurrences of each key. 
+
+
+number of elements with key less than k, it is possible to determine the position of the elements with key equal to k in the sorted output.  
+
+uses two temporary arrays:
 * an integer array of size k specifying, for each element x, the number of input elements with key less or equal to x;
 * an array of size n, where to insert the sorted elements.  
 
