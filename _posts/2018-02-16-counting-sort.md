@@ -14,9 +14,7 @@ While all comparison-based algorithms have a time complexity of O(nlog<sub>n</su
 
 According to the assumption that the keys are in the range 0 to k, the frequency of the keys can be easily computed using an integer array of size k+1 initialized with zeros. Since the i-th element of this array will be used to count the frequency of the key i, we can call it the **counter** array. We can fill the **counter** array with the actual frequencies of the keys iterating through the input array once and increasing the counter corresponding to the current input key.
 
- <figure>
-        <img src="/assets/images/countersort1.png"/>
- </figure>
+![CounterSort1](/assets/images/countersort1.png)
 
 # Building the sorted output
 
