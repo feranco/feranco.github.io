@@ -46,7 +46,7 @@
 }
 .flexslider .slides > li {
   display: none;
-  -webkit-backface-visibility: hidden;
+  /*-webkit-backface-visibility: hidden;*/
 }
 .flexslider .slides img {
   width: 100%;
@@ -86,9 +86,11 @@ html[xmlns] .flexslider .slides {
   -o-box-shadow: '' 0 1px 4px rgba(0, 0, 0, 0.2);
   box-shadow: '' 0 1px 4px rgba(0, 0, 0, 0.2);
 }
+/*
 .flexslider .slides {
   zoom: 1;
 }
+*/
 .flexslider .slides img {
   height: auto;
   -moz-user-select: none;
