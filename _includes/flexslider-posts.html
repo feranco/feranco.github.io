@@ -1,0 +1,15 @@
+<div>
+	<div class="flexslider" style="direction:rtl">
+		<ul class="slides">
+            {% assign images = site.static_files | sort: 'name' %}
+            {% for image in images %}
+                {% if image.path contains page.image-slider %}
+                <!-- <p>{{ site.baseurl }}{{ image.path }}</p> -->
+                <li>
+                    <img src="{{ site.baseurl }}{{ image.path }}" alt="image" />
+                </li>
+                {% endif %}
+            {% endfor %}
+		</ul>
+	</div>
+</div>
