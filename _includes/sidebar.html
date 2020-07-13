@@ -1,11 +1,11 @@
 <div id="sidebar">
   
   {% comment %} {% include image.html name="avatar.jpg" caption="Myself" %} {% endcomment %} 
-  
+{% comment %}  
   <figure>
         <img src="/assets/images/face.jpg" />
     </figure>
-  
+{% endcomment %}   
   <header>
     <{% if page.layout == "index" %}h1{% else %}div{% endif %} class="site-title">
       <a href="{{ site.baseurl }}/">
